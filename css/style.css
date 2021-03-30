@@ -1,0 +1,125 @@
+body{
+    background: url(../img/subtlepatterns/ep_naturalblack.png) fixed repeat;
+}
+
+.container{
+    max-width: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+}
+.container-client{
+    max-width: 1500px;
+    padding-top: 16%;
+}
+
+#header{
+    position: fixed;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 2%;
+}
+.title{
+    font-size: 1.95rem;
+    text-align: left;
+}
+.navigation{
+    text-align: right;
+}
+ul, li{
+    display: inline;
+}
+
+.text-center{ text-align: center; }
+#update_account{ 
+    display: none;
+    max-width: 97%;
+    width: 97%;
+    margin: 2rem 2rem;
+    padding: 2rem 3rem;
+    border-radius: 2rem;
+    border: 0.15rem solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.box_top_left, .box_top_right, .box_footer{
+    margin: 0;
+    padding: 2%;
+}
+
+.alert{ display: none; }
+.table, #footer, .alert{ text-align: center; }
+.table{ font-size: 0.90rem; }
+tr:hover{ background-color: rgba(0, 0, 0, 0.1); }
+.btn-table{ font-size:0.7rem; }
+.btn_haut_de_page{ text-align: center; }
+small{ font-size: 0.5em ; }
+.check_box{ padding: 0 1rem; }
+
+@media (min-width: 1200px) and (max-width: 1599px){ 
+    .title{ font-size: 1.90rem; }
+    thead, tbody{ font-size: 0.88em; }
+}
+@media (min-width: 1000px) and (max-width: 1199px){
+    thead, tbody{ font-size: 0.62em; }
+}
+@media (max-width: 999px){
+    thead, tbody{ font-size: 0.62em; }
+}
+/* Responsive so small */
+@media (max-width: 768px){
+    thead, tbody{ font-size: 0.42em; }
+    #update_account{
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0 4%;
+        border-radius: 0;
+        border-top: 0.15rem solid rgba(0, 0, 0, 0.1);
+        border-bottom: 0.15rem solid rgba(0, 0, 0, 0.1);
+        border-left: none;
+        border-right: none;
+    }
+    .title {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+    .navigation{ text-align: center; }
+    #account, #logout{ font-size: 0.7rem; }
+    h2{
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    #footer h6{ font-size: 0.8rem; }
+    #footer p{ font-size: 0.9rem; }
+}
+/*
+@media (max-width: 576px){
+    thead, tbody{ font-size: 0.22em; }
+}
+*/
+
+
+/* Optimise Client */
+@media (max-width: 1499px){
+    .container-client{
+        max-width: 1200px;
+        padding-top: 20%;
+    }
+}
+@media (max-width: 1199px){
+    .container-client{
+        max-width: 850px;
+        padding-top: 30%;
+    }
+}
+@media (max-width: 768px){
+    .container-client{
+        padding-top: 36%;
+    }
+}
