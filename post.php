@@ -196,7 +196,7 @@
         clean_Sessions();
     }
 
-    // Action after click button for add update user
+    // Action after click button for update user
     if( isset($_POST['submit_update_account']) ){
 
         // Create var nessary
@@ -236,6 +236,81 @@
         }
 
         //echo '<br>'.$sql;
+        
+        $result = $host->query($sql);
+
+        // Create message
+        $_SESSION['alert_typecolor'] = $alert_typecolor;
+        $_SESSION['alert_message'] = $alert_message;
+
+        // Back to Home page
+        retunIndex('index');
+    }
+
+    //- Action after click button for add lecon
+    if( isset($_POST['submit_add_lecon'])){
+
+        // Create var nessary
+        $alert_typecolor = 'success';
+        $alert_message = 'La leçon a bien été ajouté.';
+
+        // lecon_title
+        if( isset($_POST['lecon_title']) && ($_POST['lecon_title']!='') ){ $lecon_title = $_POST['lecon_title']; } else { $lecon_title = 'NULL'; }
+        // lecon_description
+        if( isset($_POST['lecon_description']) && ($_POST['lecon_description']!='') ){ $lecon_description = $_POST['lecon_description']; } else { $lecon_description = 'NULL'; }
+        
+        // SQL
+        $sql = 'INSERT INTO `lecons`(`title`, `description`, `date_create`, `date_update`) VALUES ("'.$lecon_title.'", "'.$lecon_description.'",now(),now())';
+
+        $result = $host->query($sql);
+
+        // Create message
+        $_SESSION['alert_typecolor'] = $alert_typecolor;
+        $_SESSION['alert_message'] = $alert_message;
+
+        // Back to Home page
+        retunIndex('index');
+    }
+
+    //-
+    if( isset($_GET['id']) && isset($_GET['update']) && $_GET['update']==true){
+        header('location:home.php?idlecon='.$_GET['id'].'&update='.$_GET['update'].'');
+    }
+
+    //- Action after click button for update lecon
+    if( isset($_POST['submit_update_lecon'])){
+
+        // Create var nessary
+        $alert_typecolor = 'success';
+        $alert_message = 'La leçon a bien été mise à jour.';
+
+        // lecon_title
+        if( isset($_POST['update_lecon_title']) && ($_POST['update_lecon_title']!='') ){ $lecon_title = $_POST['update_lecon_title']; } else { $lecon_title = 'NULL'; }
+        // lecon_description
+        if( isset($_POST['update_lecon_description']) && ($_POST['update_lecon_description']!='') ){ $lecon_description = $_POST['update_lecon_description']; } else { $lecon_description = 'NULL'; }
+        
+        // SQL
+        $sql = 'UPDATE `lecons` SET `title`="'.$lecon_title.'",`description`="'.$lecon_description.'",`date_update`=now() WHERE `id`="'.$_POST['update_lecon_id'].'"';
+        
+        $result = $host->query($sql);
+
+        // Create message
+        $_SESSION['alert_typecolor'] = $alert_typecolor;
+        $_SESSION['alert_message'] = $alert_message;
+
+        // Back to Home page
+        retunIndex('index');
+    }
+
+    //- Action after click button for delete lecon
+    if( isset($_GET['id']) && isset($_GET['delete']) && $_GET['delete']==true){
+
+        // Create var nessary
+        $alert_typecolor = 'success';
+        $alert_message = 'La leçon a bien été supprimé.';
+
+        // SQL
+        $sql = 'DELETE FROM `lecons` WHERE `id`='.$_GET['id'].'';
         
         $result = $host->query($sql);
 

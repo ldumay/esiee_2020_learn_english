@@ -44,6 +44,8 @@
             $_SESSION['alert_typecolor'] = '';
         if( empty($_SESSION['alert_message']) )
             $_SESSION['alert_message'] = '';
+        if( empty($_SESSION['alert_message_old']))
+            $_SESSION['alert_message_old'] = '';
     }
     
     // Clean necessary session
@@ -52,6 +54,8 @@
             $_SESSION['alert_typecolor'] = '';
         if( isset($_SESSION['alert_message']) )
             $_SESSION['alert_message'] = '';
+        if( isset($_SESSION['alert_message_old']))
+            $_SESSION['alert_message_old'] = '';
     }
     
     // Execute function necessary

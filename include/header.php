@@ -8,6 +8,7 @@
                 <h1 class="title"><?php echo $project_title; ?></h1>
             </div>
             <div class="col-md-5 col-xs-12 navigation">
+                <button type="button" class="btn btn-success" id="addLecon" name="addLecon">➕ Ajouter une leçon</button>
                 <button type="button" class="btn btn-info" id="account" name="account">👤 Mon compte</button>
                 <button type="button" class="btn btn-danger" id="logout" name="logout">🔒 Déconnexion</button>
             </div>

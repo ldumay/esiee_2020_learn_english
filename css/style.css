@@ -35,8 +35,17 @@ ul, li{
 }
 
 .text-center{ text-align: center; }
-#update_account{ 
+#update_account, #add_lecon{ 
     display: none;
+    max-width: 97%;
+    width: 97%;
+    margin: 2rem 2rem;
+    padding: 2rem 3rem;
+    border-radius: 2rem;
+    border: 0.15rem solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+#update_lecon{ 
     max-width: 97%;
     width: 97%;
     margin: 2rem 2rem;
@@ -73,7 +82,7 @@ small{ font-size: 0.5em ; }
 /* Responsive so small */
 @media (max-width: 768px){
     thead, tbody{ font-size: 0.42em; }
-    #update_account{
+    #update_account, #add_lecon, #update_lecon{
         max-width: 100%;
         width: 100%;
         margin: 0;

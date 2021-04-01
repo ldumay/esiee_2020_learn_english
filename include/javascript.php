@@ -16,6 +16,9 @@
             $("#account").click(function() {
                 $("#update_account").toggle("slow");
             });
+            $("#addLecon").click(function() {
+                $("#add_lecon").toggle("slow");
+            });
             if($('.alert').is(':visible')){
                 $(".alert").delay(5000).toggle("slow");
             }
