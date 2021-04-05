@@ -15,8 +15,8 @@
     $project_start_date = "30/03/2021";
     $project_start_version = "v0.1.0";
     //-
-    $project_currently_date = "30/03/2021";
-    $project_currently_version = "v0.1.0";
+    $project_currently_date = ToDay("d/m/Y");
+    $project_currently_version = "v0.2.6";
     //-
     $responsive = true;
     //-
