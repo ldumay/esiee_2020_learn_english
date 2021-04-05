@@ -302,6 +302,44 @@
         retunIndex('index');
     }
 
+    //- Action after click button for open lecon
+    if( isset($_POST['submit_open_lecon'])){
+        // Create var nessary
+        $alert_typecolor = 'success';
+        $alert_message = 'La leçon a bien été ouverte.';
+        
+        // SQL
+        $sql = 'UPDATE `lecons` SET `statut`=1 WHERE `id`="'.$_POST['update_lecon_id'].'"';
+        
+        $result = $host->query($sql);
+
+        // Create message
+        $_SESSION['alert_typecolor'] = $alert_typecolor;
+        $_SESSION['alert_message'] = $alert_message;
+
+        // Back to Home page
+        retunIndex('index');
+    }
+
+    //- Action after click button for close lecon
+    if( isset($_POST['submit_close_lecon'])){
+        // Create var nessary
+        $alert_typecolor = 'success';
+        $alert_message = 'La leçon a bien été fermé.';
+        
+        // SQL
+        $sql = 'UPDATE `lecons` SET `statut`=0 WHERE `id`="'.$_POST['update_lecon_id'].'"';
+        
+        $result = $host->query($sql);
+
+        // Create message
+        $_SESSION['alert_typecolor'] = $alert_typecolor;
+        $_SESSION['alert_message'] = $alert_message;
+
+        // Back to Home page
+        retunIndex('index');
+    }
+
     //- Action after click button for delete lecon
     if( isset($_GET['id']) && isset($_GET['delete']) && $_GET['delete']==true){
 

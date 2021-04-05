@@ -43,7 +43,9 @@
                         </div>
                         <br><br>
                         <div class="col-12 text-center">
-                            <button type="submit" class="btn btn-success" id="submit_update_lecon" name="submit_update_lecon">Mettre à jour la leçon</button>
+                            <button type="submit" class="btn btn-info" id="submit_update_lecon" name="submit_update_lecon">Mettre à jour la leçon</button>
+                            <button type="submit" class="btn btn-success" id="submit_open_lecon" name="submit_open_lecon">Ouvrir la leçon</button>
+                            <button type="submit" class="btn btn-danger" id="submit_close_lecon" name="submit_close_lecon">Fermer la leçon</button>
                         </div>
             		</form>
                     <br>

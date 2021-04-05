@@ -65,7 +65,6 @@
     $url = $_SERVER['REQUEST_URI'];
     $url = str_replace('/','',$url);
     if($url=='auth.php?type=register' && $user_register==false){
-        echo "hello";
         header('location:login.php?type=login');
     }
     if( isset($_COOKIES['user_id']) && $_COOKIES['user_id']>0 ){ $_SESSION['user_token']=$_COOKIES['user_token']; }

@@ -1,8 +1,6 @@
 <?php 
 	include('include/php_start.php');
     include('include/head.php');
-
-    $page = "list_companies.php";
     ?>
 	<body>
         <!-- Container -->
@@ -27,6 +25,8 @@
                                 <th scope="col">Description</th>
                                 <th scope="col">Date Création</th>
                                 <th scope="col">Date Modification</th>
+                                <th scope="col">Statut</th>
+                                <th scope="col">Link</th>
                                 <th scope="col">Modifier</th>
                                 <th scope="col">Supprimer</th>
                             </tr>
@@ -42,6 +42,11 @@
                                     $leconsDescription = $row['description'];
                                     $leconsDateCreate = $row['date_create'];
                                     $leconsDateUpdate = $row['date_update'];
+                                    if($row['statut']==1){ $statut = "✅"; }else{ $statut = "❌"; }
+                                    if($row['statut']==1){
+                                        $link = 'http://'.$_SERVER['HTTP_HOST'].'/lecon.php?lecon_id='.$leconsId;
+                                        $linkLecon = '<a href="'.$link.'" target="_blank">'.$link.'</a>';
+                                    }else{ $linkLecon = '<i style="color:red;">Leçon Fermée</i>'; }
                                     //-
                                     echo '
                                         <tr>
@@ -50,8 +55,10 @@
                                             <td>'.$leconsDescription.'</td>
                                             <td>'.$leconsDateCreate.'</td>
                                             <td>'.$leconsDateUpdate.'</td>
+                                            <td>'.$statut.'</td>
+                                            <td>'.$linkLecon.'</td>
                                             <td><a href="post.php?id='.$leconsId.'&update=true">🛠</a></td>
-                                            <td><a href="post.php?id='.$leconsId.'&delete=true">❌</a></td>
+                                            <td><a href="post.php?id='.$leconsId.'&delete=true">🗑</a></td>
                                         </tr>
                                     ';
                                 }
