@@ -40,6 +40,10 @@
                                     $leconsId = $row['id'];
                                     $leconsTitle = $row['title'];
                                     $leconsDescription = $row['description'];
+                                    if($row['theme']!=null){
+                                        if($row['theme']=='Halloween'){ $typeTheme = 'primary'; }elseif($row['theme']=='Noël'){ $typeTheme = 'info'; }else{ $typeTheme = 'secondary'; }
+                                        $leconsTheme = '<span class="badge rounded-pill bg-'.$typeTheme.'" style="color:white;">'.$row['theme'].'</span>';
+                                    }else{ $leconsTheme = '<span class="badge rounded-pill bg-warning" style="color:white;">Aucun thème</span>'; }
                                     $leconsDateCreate = $row['date_create'];
                                     $leconsDateUpdate = $row['date_update'];
                                     if($row['statut']==1){ $statut = "✅"; }else{ $statut = "❌"; }
@@ -53,6 +57,7 @@
                                             <td>'.$leconsId.'</td>
                                             <td>'.$leconsTitle.'</td>
                                             <td>'.$leconsDescription.'</td>
+                                            <td>'.$leconsTheme.'</td>
                                             <td>'.$leconsDateCreate.'</td>
                                             <td>'.$leconsDateUpdate.'</td>
                                             <td>'.$statut.'</td>
