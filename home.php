@@ -23,6 +23,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Description</th>
+                                <th scope="col">Thème</th>
                                 <th scope="col">Date Création</th>
                                 <th scope="col">Date Modification</th>
                                 <th scope="col">Statut</th>
@@ -44,11 +45,11 @@
                                         if($row['theme']=='Halloween'){ $typeTheme = 'primary'; }elseif($row['theme']=='Noël'){ $typeTheme = 'info'; }else{ $typeTheme = 'secondary'; }
                                         $leconsTheme = '<span class="badge rounded-pill bg-'.$typeTheme.'" style="color:white;">'.$row['theme'].'</span>';
                                     }else{ $leconsTheme = '<span class="badge rounded-pill bg-warning" style="color:white;">Aucun thème</span>'; }
-                                    $leconsDateCreate = $row['date_create'];
-                                    $leconsDateUpdate = $row['date_update'];
+                                    $leconsDateCreate = dateFormat("d/m/Y",$row['date_create']);
+                                    $leconsDateUpdate = dateFormat("d/m/Y",$row['date_update']);
                                     if($row['statut']==1){ $statut = "✅"; }else{ $statut = "❌"; }
                                     if($row['statut']==1){
-                                        $link = 'http://'.$_SERVER['HTTP_HOST'].'/lecon.php?lecon_id='.$leconsId;
+                                        $link = 'http://'.$_SERVER['HTTP_HOST'].'/lecon.php?id='.$leconsId;
                                         $linkLecon = '<a href="'.$link.'" target="_blank">'.$link.'</a>';
                                     }else{ $linkLecon = '<i style="color:red;">Leçon Fermée</i>'; }
                                     //-

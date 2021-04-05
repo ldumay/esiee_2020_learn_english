@@ -1,6 +1,6 @@
 <!-- AddLecon -->
-<div class="row">
-	<div id="add_lecon" class="col-12">
+<div id="add_lecon" class="row">
+	<div class="col-12">
 		<div class="row">
 			<div class="col-12 text-center">
                 <h2>Ajouter une leçon</h2>

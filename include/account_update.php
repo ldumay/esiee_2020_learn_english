@@ -1,6 +1,6 @@
 <!-- UpdateUser -->
-	<div class="row">
-		<div id="update_account" class="col-12">
+	<div id="update_account" class="row">
+		<div class="col-12">
 			<div class="row">
 				<div class="col-12 text-center">
                     <h2>Mise à jour du compte</h2>

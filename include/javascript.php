@@ -19,8 +19,8 @@
             $("#addLecon").click(function() {
                 $("#add_lecon").toggle("slow");
             });
-            if($('.alert').is(':visible')){
-                $(".alert").delay(5000).toggle("slow");
+            if($('#alert').is(':visible')){
+                $("#alert").delay(5000).toggle("slow");
             }
             $("#logout").click(function() {
                 $(location).attr('href', './post.php?logout=true')

@@ -12,8 +12,8 @@
             $leconsDateUpdate = $row['date_update'];
             echo '
             <!-- UpdateLecon -->
-            <div class="row">
-            	<div id="update_lecon" class="col-12">
+            <div id="update_lecon" class="row">
+            	<div class="col-12">
             		<div class="row">
             			<div class="col-12 text-center">
                             <h2>Mettre à jour une leçon</h2>

@@ -9,7 +9,7 @@ body{
 }
 .container-client{
     max-width: 1500px;
-    padding-top: 16%;
+    padding-top: 10%;
 }
 
 #header{
@@ -118,13 +118,13 @@ small{ font-size: 0.5em ; }
 @media (max-width: 1499px){
     .container-client{
         max-width: 1200px;
-        padding-top: 20%;
+        padding-top: 12%;
     }
 }
 @media (max-width: 1199px){
     .container-client{
         max-width: 850px;
-        padding-top: 30%;
+        padding-top: 19%;
     }
 }
 @media (max-width: 768px){
