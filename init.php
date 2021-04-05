@@ -16,7 +16,7 @@
     $project_start_version = "v0.1.0";
     //-
     $project_currently_date = ToDay("d/m/Y");
-    $project_currently_version = "v0.2.6";
+    $project_currently_version = "v0.2.8";
     //-
     $responsive = true;
     //-
