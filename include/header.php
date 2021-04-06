@@ -1,7 +1,6 @@
 <!-- Header -->
 <div id="header" class="row">
 
-    <?php if( isset($_SESSION['User_id']) && $_SESSION['User_id']!='' ){ ?>
     <div class="col-12">
         <div class="row">
             <div class="col-md-7 col-xs-12">
@@ -21,15 +20,6 @@
             </nav>
         </div>
     </div>
-    <?php } else { ?>
-    <div id="header" class="col-12">
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <h1 class="title text-center"><?php echo $project_title; ?></h1>
-            </div>
-        </div>
-    </div>
-    <?php } ?>
 
 </div>
 <!-- ./Header -->

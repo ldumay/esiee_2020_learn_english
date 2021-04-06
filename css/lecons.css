@@ -1,0 +1,8 @@
+.draggable_and_dropzone{
+	margin: 2%;
+	padding: 0;
+}
+
+#draggable, #dropzone, #words{
+	border: 1px solid black;
+}

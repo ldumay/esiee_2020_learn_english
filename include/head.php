@@ -58,6 +58,7 @@
 		
 		<!-- CustomStyle -->
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/lecons.css">
         <!-- ./CustomStyle -->
     </head>
     <!-- ./Head -->
