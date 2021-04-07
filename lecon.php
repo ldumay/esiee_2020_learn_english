@@ -1,6 +1,4 @@
 <?php
-    //Source tuto => https://www.digitalocean.com/community/tutorials/js-drag-and-drop-vanilla-js-fr
-
     if( isset($_GET['id']) && ( $_GET['id']==null || $_GET['id']<=0 ) ){
         $leconId = 0;
         $statut = false;
@@ -19,11 +17,6 @@
         while ( $row = $result_sql->fetch() ){
             $leconId = $row['id'];
             $leconTitle = $row['title'];
-            $leconsCollections = $row['motsCollection'];
-            if(!empty($leconsCollections) && $leconsCollections!=""){
-                $leconsCollectionsReady = true;
-                $wordId = explode(",", $leconsCollections);
-            }
             if($row['statut']==1){ $statut = true; }else{ $statut = false; }
         }
     }
@@ -31,15 +24,9 @@
 	<body>
         <!-- Container -->
 		<div class="container container-client" style="padding-top:8%;">
-            <!-- Header -->
-            <div id="header" class="col-12">
-                <div class="row">
-                    <div class="col-md-12 col-xs-12">
-                        <h1 class="title text-center"><?php echo $project_title; ?></h1>
-                    </div>
-                </div>
-            </div>
-            <!-- ./Header -->
+            <?php
+            	include('include/header.php');
+            ?>
 
             <!-- Lecon -->
             <div class="row">
@@ -47,26 +34,76 @@
                     if($statut==true && ( isset($_GET['id']) && $leconId>0 ) ){
                         ?>
                         <div class="col-md-12 content-table text-center">
+                        <br>
                             <h2><?php echo $leconTitle; ?></h2>
                                 <p>Cours ouvert.</p>
-                                <br>
-                                <?php
-                                    foreach($wordId as $word){
-                                        echo '
-                                        <div class="row draggable_and_dropzone">
-                                            <div id="draggable" class="col-md-4">draggable</div>
-                                            <div id="dropzone" class="col-md-4">dropzone</div>
-                                            <div id="words" class="col-md-4">words</div>
-                                        </div>
-                                        ';
-                                    }
-                                ?>
                             </div>
                         </div>
+                        
                         <?php
-                    }
-                    //--
-                    elseif($statut==false && ( isset($_GET['id']) && $leconId>0 )){
+                        $words_array = array();
+                        $pictures_array = array();
+
+                                $sql = 'SELECT images_and_mots.id ,mots, link FROM images_and_mots,mots,images
+                                where mots.id= images_and_mots.id_mots
+                                and images.id= images_and_mots.id_images
+                            ORDER BY RAND ( )
+                            LIMIT 4';
+                                $result_sql = $host->query($sql);
+                                foreach  ($result_sql as $row) {
+                                    $words_array[] = $row['mots'];
+                                    $pictures_array[] = $row['link'];
+                                }
+                                $words_oreder[] = $row['id'];
+                            ?>
+                        <div class="row">
+                            <div class="col-md-3 content-table text-center">
+                            <h2>Liste des mots</h2>
+                                <div1 class="column column-liste" ondrop="drop(event)" ondragover="allowDrop(event)" id="list">
+                                    
+                                    <article class="card" id ="0" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                        <h3><?php echo $words_array[0]; ?></h3>
+                                    </article>
+                                    <article class="card" id ="1" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                        <h3><?php echo $words_array[1]; ?></h3>
+                                    </article>
+                                    <article class="card" id ="2" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                        <h3><?php echo $words_array[2]; ?></h3>
+                                    </article>
+                                    <article class="card" id ="3" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                        <h3><?php echo $words_array[3]; ?></h3>
+                                    </article>
+                                </div1>
+                            </div>
+
+
+                            <div class="col-md-2 content-table text-center">
+                                <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
+                                    <img class="pictures" id="0" src="/learnenglish/images/<?php echo $pictures_array[0]; ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-2 content-table text-center">
+                                <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
+                                    <img class="pictures" id="1" src="/learnenglish/images/<?php echo $pictures_array[1]; ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-2 content-table text-center">
+                                <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
+                                    <img class="pictures" id="2" src="/learnenglish/images/<?php echo $pictures_array[2]; ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-2 content-table text-center">
+                                <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
+                                    <img class="pictures" id ="3" src="/learnenglish/images/<?php echo $pictures_array[3]; ?>">
+                                </div>                                            
+                            </div>                                            
+                        </div>
+                        <div class="bouton" onclick="console.log(verify())">
+                            Valider
+                        </div>
+                        
+                    <?php
+                    }elseif($statut==false && ( isset($_GET['id']) && $leconId>0 )){
                         ?>
                         <div class="col-md-12 content-table text-center">
                             <h2><?php echo $leconTitle; ?></h2>
@@ -107,3 +144,76 @@
     <?php
     include('include/javascript.php');
 ?>
+
+<script src="drag-n-drop.js"></script>
+<style>
+.card {
+    cursor: grab;
+}
+
+.card:active {
+    cursor: grabbing;
+}
+.card {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.card.dragging {
+    opacity: .5;
+    transform: scale(.8);
+}
+
+.column {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.column.drop {
+    border: 2px dashed #FFF;
+}
+
+.column.drop article {
+    pointer-events: none;
+}
+
+div#disciplines {
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content:space-around;
+    width:100%;
+  }
+  div.discipline {
+    width:49%;
+  }
+  div.titre {
+    text-align:center;
+    font-weight:bold;
+    font-size:20px;
+  }
+  div#origine, div#container {
+    padding:10px;
+    border:2px solid #000;
+    width:100%;
+    min-height:230px;
+    background:#fff;
+  }
+  div.bouton {
+    cursor:pointer;
+    border:1px solid #333;
+    border-radius:4px;
+    display:inline-block;
+    padding:5px;
+    margin:10px;  
+    font-weight:bold;
+    background-color:#ccc;
+    color:#000;
+  }
+  div.bouton:hover {
+    background-color:#000;
+    color:#fff;
+  }
+  img{
+      width:250px;
+      height:250px;
+
+  }
+</style>
