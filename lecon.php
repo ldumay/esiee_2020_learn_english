@@ -59,8 +59,8 @@
                         <div class="row">
                             <div class="col-md-3 content-table text-center">
                             <h2>Liste des mots</h2>
-                                <div1 class="column column-liste" ondrop="drop(event)" ondragover="allowDrop(event)" id="list">
-                                    
+                                <div1  class="column column-liste" ondrop="drop(event)" ondragover="allowDrop(event)" id="list">
+                                    <div class="visibility" >azertyuiop</div>
                                     <article class="card" id ="0" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
                                         <h3><?php echo $words_array[0]; ?></h3>
                                     </article>
@@ -175,20 +175,9 @@
     pointer-events: none;
 }
 
-div#disciplines {
-    display:flex;
-    flex-wrap: nowrap;
-    justify-content:space-around;
-    width:100%;
-  }
-  div.discipline {
-    width:49%;
-  }
-  div.titre {
-    text-align:center;
-    font-weight:bold;
-    font-size:20px;
-  }
+
+
+ 
   div#origine, div#container {
     padding:10px;
     border:2px solid #000;
@@ -214,6 +203,12 @@ div#disciplines {
   img{
       width:250px;
       height:250px;
-
+  }
+  img{
+      width:250px;
+      height:250px;
+  }
+  div.visibility {
+  visibility: hidden;
   }
 </style>
