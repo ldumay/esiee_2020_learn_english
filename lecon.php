@@ -76,25 +76,24 @@
                                 </div1>
                             </div>
 
-
                             <div class="col-md-2 content-table text-center">
                                 <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
-                                    <img class="pictures" id="0" src="/images/<?php echo $pictures_array[0]; ?>">
+                                    <img class="pictures" id="0" src="/learnenglish/images/<?php echo $pictures_array[0]; ?>">
                                 </div>
                             </div>
                             <div class="col-md-2 content-table text-center">
                                 <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
-                                    <img class="pictures" id="1" src="/images/<?php echo $pictures_array[1]; ?>">
+                                    <img class="pictures" id="1" src="/learnenglish/images/<?php echo $pictures_array[1]; ?>">
                                 </div>
                             </div>
                             <div class="col-md-2 content-table text-center">
                                 <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
-                                    <img class="pictures" id="2" src="/images/<?php echo $pictures_array[2]; ?>">
+                                    <img class="pictures" id="2" src="/learnenglish/images/<?php echo $pictures_array[2]; ?>">
                                 </div>
                             </div>
                             <div class="col-md-2 content-table text-center">
                                 <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
-                                    <img class="pictures" id ="3" src="/images/<?php echo $pictures_array[3]; ?>">
+                                    <img class="pictures" id ="3" src="/learnenglish/images/<?php echo $pictures_array[3]; ?>">
                                 </div>                                            
                             </div>                                            
                         </div>
