@@ -33,19 +33,18 @@ CREATE TABLE `images` (
   `id` int(64) NOT NULL,
   `link` varchar(64) DEFAULT NULL,
   `date_create` date DEFAULT NULL,
-  `date_update` date DEFAULT NULL,
-  `id_lecon` int(64) NOT NULL
+  `date_update` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `images`
 --
 
-INSERT INTO `images` (`id`, `link`, `date_create`, `date_update`,`id_lecon`) VALUES
-(1, 'bateau.jpg', '2021-04-02', '2021-04-02',2),
-(2, 'moto.jpg', '2021-04-02', '2021-04-02',2),
-(3, 'velo.jpg', '2021-04-02', '2021-04-02',2),
-(4, 'voiture.jpg', '2021-04-02', '2021-04-02',2);
+INSERT INTO `images` (`id`, `link`, `date_create`, `date_update`) VALUES
+(1, 'bateau.jpg', '2021-04-02', '2021-04-02'),
+(2, 'moto.jpg', '2021-04-02', '2021-04-02'),
+(3, 'velo.jpg', '2021-04-02', '2021-04-02'),
+(4, 'voiture.jpg', '2021-04-02', '2021-04-02');
 
 -- --------------------------------------------------------
 
@@ -214,19 +213,18 @@ CREATE TABLE `sound` (
   `id` int(64) NOT NULL,
   `link` varchar(64) DEFAULT NULL,
   `date_create` date DEFAULT NULL,
-  `date_update` date DEFAULT NULL,
-  `id_lecon` int(64) NOT NULL
+  `date_update` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `sound`
 --
 
-INSERT INTO `sound` (`id`, `link`, `date_create`, `date_update`,`id_lecon`) VALUES
-(1, 'chat', '2021-04-02', '2021-04-02',1),
-(2, 'ane', '2021-04-02', '2021-04-02',1),
-(3, 'souris', '2021-04-02', '2021-04-02',1),
-(4, 'chien', '2021-04-02', '2021-04-02',1);
+INSERT INTO `sound` (`id`, `link`, `date_create`, `date_update`) VALUES
+(1, 'chat', '2021-04-02', '2021-04-02'),
+(2, 'ane', '2021-04-02', '2021-04-02'),
+(3, 'souris', '2021-04-02', '2021-04-02'),
+(4, 'chien', '2021-04-02', '2021-04-02');
 
 -- --------------------------------------------------------
 
@@ -238,19 +236,18 @@ CREATE TABLE `def` (
   `id` int(64) NOT NULL,
   `link` varchar(255) DEFAULT NULL,
   `date_create` date DEFAULT NULL,
-  `date_update` date DEFAULT NULL,
-    `id_lecon` int(64) NOT NULL
+  `date_update` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `def`
 --
 
-INSERT INTO `def` (`id`, `link`, `date_create`, `date_update`,`id_lecon`) VALUES
-(1, 'je flotte', '2021-04-02', '2021-04-02',3),
-(2, 'j\'ai deux roues et un moteur', '2021-04-02', '2021-04-02',3),
-(3, 'j\'ai deux roues et des pédales', '2021-04-02', '2021-04-02',3),
-(4, 'j\'ai quatres roues et un moteur', '2021-04-02', '2021-04-02',3);
+INSERT INTO `def` (`id`, `link`, `date_create`, `date_update`) VALUES
+(1, 'je flotte', '2021-04-02', '2021-04-02'),
+(2, 'j\'ai deux roues et un moteur', '2021-04-02', '2021-04-02'),
+(3, 'j\'ai deux roues et des pédales', '2021-04-02', '2021-04-02'),
+(4, 'j\'ai quatres roues et un moteur', '2021-04-02', '2021-04-02');
 
 -- --------------------------------------------------------
 

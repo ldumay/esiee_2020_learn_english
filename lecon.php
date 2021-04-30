@@ -17,6 +17,7 @@
         while ( $row = $result_sql->fetch() ){
             $leconId = $row['id'];
             $leconTitle = $row['title'];
+            $leconDescription = $row['description'];
             if($row['statut']==1){ $statut = true; }else{ $statut = false; }
         }
     }
@@ -37,71 +38,314 @@
                         <br>
                             <h2><?php echo $leconTitle; ?></h2>
                                 <p>Cours ouvert.</p>
+                                <?php echo $leconDescription; ?>
                             </div>
                         </div>
                         
                         <?php
-                        $words_array = array();
-                        $pictures_array = array();
-
-                                $sql = 'SELECT images_and_mots.id ,mots, link FROM images_and_mots,mots,images
-                                where mots.id= images_and_mots.id_mots
-                                and images.id= images_and_mots.id_images
+                        if($leconDescription == "son" ){
+                            $words_array = array();
+                            $sound_array = array();
+                            $sql = 'SELECT sound_and_mots.id ,mots, link FROM sound_and_mots,mots,sound
+                                    where mots.id= sound_and_mots.id_mots
+                                    and sound.id= sound_and_mots.id_sound
+                                    
                             ORDER BY RAND ( )
                             LIMIT 4';
                                 $result_sql = $host->query($sql);
                                 foreach  ($result_sql as $row) {
                                     $words_array[] = $row['mots'];
-                                    $pictures_array[] = $row['link'];
+                                    $sound_array[] = $row['link'];
                                 }
                                 $words_oreder[] = $row['id'];
                             ?>
-                        <div class="row">
-                            <div class="col-md-3 content-table text-center">
-                            <h2>Liste des mots</h2>
-                                <div1  class="column column-liste" ondrop="drop(event)" ondragover="allowDrop(event)" id="list">
-                                    <div class="visibility" >azertyuiop</div>
-                                    <article class="card" id ="0" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
-                                        <h3><?php echo $words_array[0]; ?></h3>
-                                    </article>
-                                    <article class="card" id ="1" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
-                                        <h3><?php echo $words_array[1]; ?></h3>
-                                    </article>
-                                    <article class="card" id ="2" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
-                                        <h3><?php echo $words_array[2]; ?></h3>
-                                    </article>
-                                    <article class="card" id ="3" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
-                                        <h3><?php echo $words_array[3]; ?></h3>
-                                    </article>
-                                </div1>
+                            <div class="row">
+                                <div class="col-md-3 content-table text-center">
+                                    <h2>Liste des mots</h2>
+                                    <div1  class="column column-liste" ondrop="drop(event)" ondragover="allowDrop(event)" id="list">
+                                        <div class="visibility" >azertyuiop</div>
+                                        <article class="card" id ="0" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[0]; ?></h3>
+                                        </article>
+                                        <article class="card" id ="1" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[1]; ?></h3>
+                                        </article>
+                                        <article class="card" id ="2" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[2]; ?></h3>
+                                        </article>
+                                        <article class="card" id ="3" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[3]; ?></h3>
+                                        </article>
+                                    </div1>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
+                                        <figure id ="0">
+                                            <audio
+                                                controls 
+                                                src="/learnenglish/sons/<?php echo $sound_array[0];?>">
+                                                    Your browser does not support the
+                                                    <code>audio</code> element.
+                                            </audio>
+                                        </figure>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
+                                        <figure id ="1">
+                                            <audio
+                                                controls 
+                                                src="/learnenglish/sons/<?php echo $sound_array[1];?>">
+                                                    Your browser does not support the
+                                                    <code>audio</code> element.
+                                            </audio>
+                                        </figure>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
+                                    <figure id ="2">
+                                            <audio
+                                                controls 
+                                                src="/learnenglish/sons/<?php echo $sound_array[2];?>">
+                                                    Your browser does not support the
+                                                    <code>audio</code> element.
+                                            </audio>
+                                        </figure>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
+                                    <figure id ="3">
+                                            <audio controls 
+                                                src="/learnenglish/sons/<?php echo $sound_array[3];?>">
+                                                    Your browser does not support the
+                                                    <code>audio</code> element.
+                                            </audio>
+                                        </figure>
+                                    </div>                                            
+                                </div>                                            
+                            </div>
+                            <div class="bouton" onclick="console.log(verify())">
+                                Valider
+                            </div>
+                            <?php
+                        }elseif($leconDescription == "images" ){
+                            $words_array = array();
+                            $pictures_array = array();
+                            $sql = 'SELECT images_and_mots.id ,mots, link FROM images_and_mots,mots,images
+                            where mots.id= images_and_mots.id_mots
+                            and images.id= images_and_mots.id_images
+                            
+                        ORDER BY RAND ( )
+                        LIMIT 4';
+                            $result_sql = $host->query($sql);
+                            foreach  ($result_sql as $row) {
+                                $words_array[] = $row['mots'];
+                                $pictures_array[] = $row['link'];
+                            }
+                            $words_oreder[] = $row['id'];
+                            ?>
+                            <div class="row">
+                                <div class="col-md-3 content-table text-center">
+                                <h2>Liste des mots</h2>
+                                    <div1  class="column column-liste" ondrop="drop(event)" ondragover="allowDrop(event)" id="list">
+                                        <div class="visibility" >azertyuiop</div>
+                                        <article class="card" id ="0" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[0]; ?></h3>
+                                        </article>
+                                        <article class="card" id ="1" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[1]; ?></h3>
+                                        </article>
+                                        <article class="card" id ="2" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[2]; ?></h3>
+                                        </article>
+                                        <article class="card" id ="3" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[3]; ?></h3>
+                                        </article>
+                                    </div1>
+                                </div>
+
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
+                                        <img class="pictures" id="0" src="/learnenglish/images/<?php echo $pictures_array[0]; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
+                                        <img class="pictures" id="1" src="/learnenglish/images/<?php echo $pictures_array[1]; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
+                                        <img class="pictures" id="2" src="/learnenglish/images/<?php echo $pictures_array[2]; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
+                                        <img class="pictures" id ="3" src="/learnenglish/images/<?php echo $pictures_array[3]; ?>">
+                                    </div>                                            
+                                </div>                                            
+                            </div>
+                            <div class="bouton" onclick="console.log(verify())">
+                                Valider
+                            </div>
+                            <?php
+                        }elseif($leconDescription == "bonus" ){
+                            $words_array = array();
+                            $def_array = array();
+                            $sql = 'SELECT def_and_mots.id , mots.mots m, def.link dl FROM def_and_mots,mots,def
+                            where mots.id= def_and_mots.id_mots
+                            and def.id= def_and_mots.id_def
+                            
+                        ORDER BY RAND ( )
+                        LIMIT 4';
+                                $result_sql = $host->query($sql);
+                                foreach  ($result_sql as $row) {
+                                    $words_array[] = $row['m'];
+                                    $def_array[] = $row['dl'];
+                                }
+                                $words_oreder[] = $row['id'];
+                            ?>
+                            <div class="row">
+                                <div class="col-md-3 content-table text-center">
+                                <h2>Liste des mots</h2>
+                                    <div1  class="column column-liste" ondrop="drop(event)" ondragover="allowDrop(event)" id="list">
+                                        <div class="visibility" >azertyuiop</div>
+                                        <article class="card" id ="0" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[0]; ?></h3>
+                                        </article>
+                                        <article class="card" id ="1" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[1]; ?></h3>
+                                        </article>
+                                        <article class="card" id ="2" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[2]; ?></h3>
+                                        </article>
+                                        <article class="card" id ="3" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <h3><?php echo $words_array[3]; ?></h3>
+                                        </article>
+                                    </div1>
+                                </div>
+
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
+                                        <p class="font-weight-normal" id="0"><?php echo $def_array[0]; ?></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
+                                        <p class="font-weight-normal" id="1"><?php echo $def_array[1]; ?></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
+                                        <p class="font-weight-normal" id="2"><?php echo $def_array[2]; ?></p>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
+                                        <p class="font-weight-normal" id="3"><?php echo $def_array[3]; ?></p>
+                                    </div>                                            
+                                </div>                                            
+                            </div>
+                            <br>
+                            <div class="bouton" onclick="console.log(verify())">
+                                Valider
+                            </div>
+                            <?php
+                            }elseif($leconDescription == "sonimages" ){
+                                $words_array = array();
+                                $pictures_array = array();
+                                $sql = 'SELECT sound_and_images.id ,sound.link sl, images.link il FROM sound_and_images,images,sound
+                                    where images.id= sound_and_images.id_images
+                                    and sound.id= sound_and_images.id_sound
+                                    
+                            ORDER BY RAND ( )
+                            LIMIT 4';
+                                $result_sql = $host->query($sql);
+                                foreach  ($result_sql as $row) {
+                                    $pictures_array[] = $row['il'];
+                                    $sound_array[] = $row['sl'];
+                                }
+                                $words_oreder[] = $row['id'];
+                            ?>
+                                <div class="row">
+                                    <div class="col-md-3 content-table text-center">
+                                        <h2>Liste des mots</h2>
+                                        <div1  class="column column-liste" ondrop="drop(event)" ondragover="allowDrop(event)" id="list">
+                                            <div class="visibility" >azertyuiop</div>
+                                            <article class="card" id ="0" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <figure id ="0">
+                                                <audio
+                                                    controls 
+                                                    src="/learnenglish/sons/<?php echo $sound_array[0];?>">
+                                                        Your browser does not support the
+                                                        <code>audio</code> element.
+                                                </audio>
+                                            </figure>
+                                            </article>
+                                            <article class="card" id ="1" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <figure id ="1">
+                                                <audio
+                                                    controls 
+                                                    src="/learnenglish/sons/<?php echo $sound_array[1];?>">
+                                                        Your browser does not support the
+                                                        <code>audio</code> element.
+                                                </audio>
+                                            </figure>
+                                            </article>
+                                            <article class="card" id ="2" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <figure id ="2">
+                                                <audio
+                                                    controls 
+                                                    src="/learnenglish/sons/<?php echo $sound_array[2];?>">
+                                                        Your browser does not support the
+                                                        <code>audio</code> element.
+                                                </audio>
+                                            </figure>
+                                            </article>
+                                            <article class="card" id ="3" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <figure id ="3">
+                                                <audio controls 
+                                                    src="/learnenglish/sons/<?php echo $sound_array[3];?>">
+                                                        Your browser does not support the
+                                                        <code>audio</code> element.
+                                                </audio>
+                                            </figure>
+                                            </article>
+                                        </div1>
+                                    </div>
+                                    <div class="col-md-2 content-table text-center">
+                                    <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
+                                        <img class="pictures" id="0" src="/learnenglish/images/<?php echo $pictures_array[0]; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
+                                        <img class="pictures" id="1" src="/learnenglish/images/<?php echo $pictures_array[1]; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
+                                        <img class="pictures" id="2" src="/learnenglish/images/<?php echo $pictures_array[2]; ?>">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 content-table text-center">
+                                    <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
+                                        <img class="pictures" id ="3" src="/learnenglish/images/<?php echo $pictures_array[3]; ?>">
+                                    </div>                                            
+                                </div>                                            
                             </div>
 
-                            <div class="col-md-2 content-table text-center">
-                                <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
-                                    <img class="pictures" id="0" src="/learnenglish/images/<?php echo $pictures_array[0]; ?>">
+                                    
+                                <div class="bouton" onclick="console.log(verify())">
+                                    Valider
                                 </div>
-                            </div>
-                            <div class="col-md-2 content-table text-center">
-                                <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
-                                    <img class="pictures" id="1" src="/learnenglish/images/<?php echo $pictures_array[1]; ?>">
-                                </div>
-                            </div>
-                            <div class="col-md-2 content-table text-center">
-                                <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
-                                    <img class="pictures" id="2" src="/learnenglish/images/<?php echo $pictures_array[2]; ?>">
-                                </div>
-                            </div>
-                            <div class="col-md-2 content-table text-center">
-                                <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
-                                    <img class="pictures" id ="3" src="/learnenglish/images/<?php echo $pictures_array[3]; ?>">
-                                </div>                                            
-                            </div>                                            
-                        </div>
-                        <div class="bouton" onclick="console.log(verify())">
-                            Valider
-                        </div>
-                        
+                            <?php
+                        }
+
+?>
                     <?php
+                        
                     }elseif($statut==false && ( isset($_GET['id']) && $leconId>0 )){
                         ?>
                         <div class="col-md-12 content-table text-center">
