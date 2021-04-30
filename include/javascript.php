@@ -9,6 +9,23 @@
     <script type="text/javascript" src="https://dev.ldumay.fr/resources/bootstrap/4.1.3/js/bootstrap.js"></script>
     <!-- ./BootstrapCoreJS -->
 
+    <!-- Interact.JS -->
+    <script type="text/javascript" src="https://cdn.interactjs.io/v1.10.11/interactjs/index.js"></script>
+    <script type="module">
+        import interact from 
+        'https://cdn.interactjs.io/v1.10.11/interactjs/index.js'
+
+        interact('.item').draggable({
+          listeners: {
+            move (event) {
+              console.log(event.pageX,
+                          event.pageY)
+            }
+          }
+    })
+    </script>
+    <!-- ./Interact.JS -->
+
     <!-- JavascriptActive -->
     <script type="text/javascript">
         // - - | JS actif | - - //
