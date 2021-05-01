@@ -27,6 +27,7 @@
                 $isAlreadyExistingFileCSV = true;
             }
         }
+        closedir($dir);
 
         if($isAlreadyExistingFileCSV==true){
 

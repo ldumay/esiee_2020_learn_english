@@ -3,7 +3,7 @@
 	<div class="col-12">
 		<div class="row">
 			<div class="col-12 text-center">
-                <h2>Ajouter une leçon</h2>
+                <h2>Créer une nouvelle leçon</h2>
                 <br>
             </div>
 		</div>
@@ -21,7 +21,15 @@
                     <div class="form-group">
                         <label for="first_name">Titre</label>
                         <select class="form-control" id="lecon_theme" name="lecon_theme">
-                            <option value="Halloween">Halloween</option>
+                            <?php
+                                $sql = 'SELECT * FROM themes';
+                                $result_sql = $host->query($sql);
+                                while ( $row = $result_sql->fetch() ){
+                                    $theme_id = $row['id'];
+                                    $theme_title = $row['title'];
+                                    echo '<option value="'.$theme_id.'">'.$theme_title.'</option>';
+                                }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -31,16 +39,6 @@
                         <label for="last_name">Description</label>
                         <input class="form-control" type="text" id="lecon_description" name="lecon_description" placeholder="Description">
                     </div>
-
-                    <!-- Zip -->
-                    <h5>Leçon au format zip : </h5>
-                    <div class="input-group mb-3">
-                        <input type="file" class="form-control"  id="lecon_zip" name="lecon_zip">
-                    </div>
-                    <p>Le zip dois contenir :
-                        <br>4 images au format .jpeg
-                        <br>1 fichier .csv contenu le nom des images Anglais = Français
-                    </p>
                 </div>
             </div>
             <br><br>

@@ -33,8 +33,17 @@
             $("#account").click(function() {
                 $("#update_account").toggle("slow");
             });
+            $("#importLecon").click(function() {
+                $("#import_lecon").toggle("slow");
+            });
             $("#addLecon").click(function() {
                 $("#add_lecon").toggle("slow");
+            });
+            $("#addTheme").click(function() {
+                $("#add_theme").toggle("slow");
+            });
+            $("#addUser").click(function() {
+                $("#add_user").toggle("slow");
             });
             if($('#alert').is(':visible')){
                 $("#alert").delay(5000).toggle("slow");

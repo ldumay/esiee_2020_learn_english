@@ -48,6 +48,7 @@
                 $isAlreadyExistingFileExtract = true;
             }
         }
+        closedir($dir);
         
         if($debug==true){
             echo 'isAlreadyExistingFileExtract : ';
@@ -73,18 +74,30 @@
                 if( ($zipCore->extractTo($destitation) == true) ){
                     $zipCore->close();
                     $result = 'Zip opened.';
-                    if($debug==true){ echo $result.'<br>'; } else { return $result; }
+                    if($debug==true){
+                        echo $result.'<br>';
+                        return $result;
+                    } else { return $result; }
                 } else {
                     $result = 'Zip extract error.';
-                    if($debug==true){ echo $result; } else { return $result; }
+                    if($debug==true){
+                        echo $result;
+                        return $result;
+                    } else { return $result; }
                 }
             } else {
                 $result = 'Zip failed, code : ' . $file_opened.' .<br>';
-                if($debug==true){ echo $result; } else { return $result; }
+                if($debug==true){
+                    echo $result;
+                    return $result;
+                } else { return $result; }
             }
 
         } else { $result = 'Erreur d\'extraction ! Ce dossier esiste déjà.'; }
-        if($debug==true){ echo $result; } else { return $result; }
+        if($debug==true){
+            echo $result;
+            return $result;
+        } else { return $result; }
     }
 
     /**

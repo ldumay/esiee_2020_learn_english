@@ -1,4 +1,4 @@
 <?php
 	$user_login=true;
-	$user_register=false;
+	$user_register=true;
 ?>

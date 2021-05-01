@@ -30,12 +30,15 @@ body{
 .navigation{
     text-align: right;
 }
+.navigation .btn{
+    font-size: 12px;
+}
 ul, li{
     display: inline;
 }
 
 .text-center{ text-align: center; }
-#update_account, #add_lecon{ 
+#update_account, #import_lecon, #add_lecon, #add_theme, #add_user{ 
     display: none;
     max-width: 97%;
     width: 97%;
@@ -45,7 +48,7 @@ ul, li{
     border: 0.15rem solid rgba(0, 0, 0, 0.1);
     background-color: rgba(0, 0, 0, 0.1);
 }
-#update_lecon{ 
+#update_lecon, #update_theme, #update_user{ 
     max-width: 97%;
     width: 97%;
     margin: 2rem 2rem;
@@ -82,7 +85,7 @@ small{ font-size: 0.5em ; }
 /* Responsive so small */
 @media (max-width: 768px){
     thead, tbody{ font-size: 0.42em; }
-    #update_account, #add_lecon, #update_lecon{
+    #update_account, #import_lecon, #add_lecon, #add_theme, #add_user, #update_lecon, #update_theme, #update_user{
         max-width: 100%;
         width: 100%;
         margin: 0;
