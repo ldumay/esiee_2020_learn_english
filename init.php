@@ -5,6 +5,10 @@
 
     // Others includes
 	include('include/ldumay_package_functions.php');
+    include('include/File.php');
+    include('include/Zip.php');
+    include('include/OnZip.php');
+    include('include/Extractor.php');
 	include('include/bdd.php');
 	
     session_start();
