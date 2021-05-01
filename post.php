@@ -1,6 +1,9 @@
 <?php
     include('init.php');
 
+    $debugPage = true;
+    $debugPageFunctions = true;
+
     // Create necessary var and functions
     function retunIndex($selected){ 
         if($selected=='index') // If this connection avaible
@@ -258,8 +261,50 @@
         if( isset($_POST['lecon_title']) && ($_POST['lecon_title']!='') ){ $lecon_title = $_POST['lecon_title']; } else { $lecon_title = 'NULL'; }
         // lecon_description
         if( isset($_POST['lecon_description']) && ($_POST['lecon_description']!='') ){ $lecon_description = $_POST['lecon_description']; } else { $lecon_description = 'NULL'; }
+        // lecon_theme
+        if( isset($_POST['lecon_theme']) && ($_POST['lecon_theme']!='') ){ $lecon_theme = $_POST['lecon_theme']; } else { $lecon_theme = 'NULL'; }
+        // lecon_zip
+        if( isset($_FILES['lecon_zip']) && ($_FILES['lecon_zip']!='') ){ $lecon_zip = $_FILES['lecon_zip']; } else { $lecon_zip = 'NULL'; }
+
+        //--> Include : File.php ==> checkFile($zip);
+        //--> Include : Zip.php ==> fileZipOpenAndExtract($zip);
+
+        if($debugPage==true){
+            echo "<hr>";
+            echo "<h3>New Leçon</h3>";
+            var_dump($lecon_title);
+            echo "<hr>";
+            var_dump($lecon_description);
+            echo "<hr>";
+            var_dump($lecon_theme);
+            echo "<hr>";
+            var_dump($lecon_zip);
+        }
+
+        if($debugPage==true){
+            echo "<hr>";
+            echo "<h3>Get file</h3>";
+        }
+        $result_1 = fileGetZip($lecon_zip, $debugPageFunctions);
+        if($result_1=="Enregistrement du zip OK." || $result_1=="Erreur transfert ! Ce zip esiste déjà."){ echo "[GOOD - A]<br>"; }
+
+        if($debugPage==true){
+            echo "<hr>";
+            echo "<h3>Extration file</h3>";
+        }
+        $result_2 = fileZipOpenAndExtract($lecon_zip, $debugPageFunctions);
+        //extrator($file_tmp_name, $file_destination);
+        if($result_2=="Zip opened." || $result_2=="Erreur d'extraction ! Ce dossier esiste déjà."){ echo "[GOOD - B]<br>"; }
         
+        if($debugPage==true){
+            echo "<hr>";
+            echo "<h3>Read file</h3>";
+            $csv = getCSVOnZip($lecon_zip, $debugPageFunctions);
+        }
+        if($csv!="failed \"_elementsList.csv\""){ echo "[GOOD - C]"; }
+
         // SQL
+        /*
         $sql = 'INSERT INTO `lecons`(`title`, `description`, `date_create`, `date_update`) VALUES ("'.$lecon_title.'", "'.$lecon_description.'",now(),now())';
 
         $result = $host->query($sql);
@@ -270,6 +315,7 @@
 
         // Back to Home page
         retunIndex('index');
+        */
     }
 
     //-
