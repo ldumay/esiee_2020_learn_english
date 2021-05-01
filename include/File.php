@@ -55,17 +55,29 @@
             //-
             if( ($isAlreadyExistingFile == false) && (move_uploaded_file($file_tmp_name,$file_destination)) ){
                 $result = "Enregistrement du zip OK.";
-                if($debug==true){ echo $result; } else { return $result; }
+                if($debug==true){
+                    echo $result;
+                    return $result;
+                } else { return $result; }
             } else if($isAlreadyExistingFile==true){
                 $result = "Erreur transfert ! Ce zip esiste déjà.";
-                if($debug==true){ echo $result; } else { return $result; }
+                if($debug==true){
+                    echo $result;
+                    return $result;
+                } else { return $result; }
             }else{
                 $result = "Erreur transfert ! Trop lourd ou non zip.";
-                if($debug==true){ echo $result; } else { return $result; }
+                if($debug==true){
+                    echo $result;
+                    return $result;
+                } else { return $result; }
             }
         }else{
             $result = "Trop lourd ou non zip.";
-            if($debug==true){ echo $result; } else { return $result; }
+            if($debug==true){
+                echo $result;
+                return $result;
+            } else { return $result; }
         }
     }
 ?>

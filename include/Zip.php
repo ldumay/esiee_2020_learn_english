@@ -72,8 +72,8 @@
             if ($file_opened == TRUE) {
                 if( ($zipCore->extractTo($destitation) == true) ){
                     $zipCore->close();
-                    $result = 'Zip opened.<br>';
-                    if($debug==true){ echo $result; } else { return $result; }
+                    $result = 'Zip opened.';
+                    if($debug==true){ echo $result.'<br>'; } else { return $result; }
                 } else {
                     $result = 'Zip extract error.';
                     if($debug==true){ echo $result; } else { return $result; }

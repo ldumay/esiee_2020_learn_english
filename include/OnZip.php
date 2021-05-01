@@ -2,7 +2,7 @@
     function getCSVOnZip($file, $debug){
         
         $source = "shares_unzip";
-        $pathFileCSV = "_elementsList.csv";
+        $file_csv = "_elementsList.csv";
 
         if($debug==true){
             echo '[Read csv on zip]<br>';
@@ -15,47 +15,77 @@
         $file_type = $file['type'];
         $file_size = $file['size'];
         $file_tmp_name = $file['tmp_name'];
-        $file_source = $source.'/'.$file_name.'/'.$pathFileCSV;
+        $file_source_path = $source.'/'.$file_name;
+        $file_source_file = $source.'/'.$file_name.'/'.$file_csv;
 
-        if($debug==true){
-            echo 'Vérification : <br>'.
-            '<br>'.
-            '0 - file_full_name : '.$file_full_name.'<br>'.
-            '1 - file_name : '.$file_name.'<br>'.
-            '2 - file_extension : '.$file_extension.'<br>'.
-            '3 - file_type : '.$file_type.'<br>'.
-            '4 - file_size : '.$file_size.' octets<br>'.
-            '5 - file_tmp_name : '.$file_tmp_name.'<br>'.
-            '<br>';
-            echo 'File to unzip : '.$file_name.'<br>';
-            echo 'Source : '.$file_source.'<br>';
+        //Checking file in destination before extraction
+        $isAlreadyExistingFileCSV = false;
+        $dir = opendir($file_source_path);
+        while($file = readdir($dir)){
+            if($debug==true){ echo 'File / File full name |=> '.$file.' / '.$file_csv.'<br>'; }
+            if($file==$file_csv){
+                $isAlreadyExistingFileCSV = true;
+            }
         }
 
-        $myfile = fopen($file_source, "r") or die("Unable to open file!");
-        $datas = explode("\n", fread($myfile, filesize($file_source)));
-        fclose($myfile);
+        if($isAlreadyExistingFileCSV==true){
 
-        $element = [];
-        if($debug==true){
-            echo '<br>';
-            var_dump($datas);
+            if($debug==true){
+                echo '<br>Vérification : <br>'.
+                '<br>'.
+                '0 - file_full_name : '.$file_full_name.'<br>'.
+                '1 - file_name : '.$file_name.'<br>'.
+                '2 - file_extension : '.$file_extension.'<br>'.
+                '3 - file_type : '.$file_type.'<br>'.
+                '4 - file_size : '.$file_size.' octets<br>'.
+                '5 - file_tmp_name : '.$file_tmp_name.'<br>'.
+                '<br>'.
+                'File to unzip : '.$file_name.'<br>'.
+                'Source : '.$file_source_file.'<br>'.
+                'isAlreadyExistingFileCSV : ';
+                var_dump($isAlreadyExistingFileCSV);
+                echo '<br>';
+            }
 
-            echo '<br><br>';
+            $myfile = fopen($file_source_file, "r") or die("Unable to open file!");
+            $datas = explode("\n", fread($myfile, filesize($file_source_file)));
+            fclose($myfile);
+
+            $element = [];
+            if($debug==true){
+                echo '<br>';
+                var_dump($datas);
+
+                echo '<br><br>';
+            }
             foreach($datas as $data){
-                echo $data.'<br>';
+                if($debug==true){ echo $data.'<br>'; }
                 $elements[] = explode(';', $data);
             }
+            if($debug==true){
+                echo '<br>';
+                var_dump($elements);
 
-            echo '<br>';
-            var_dump($elements);
-
-            echo '<br><br>';
-            foreach($elements as $element){
-                echo $element[0].' : '.$element[1].'<br>';
+                echo '<br><br>';
+                foreach($elements as $element){
+                    echo $element[0].' : '.$element[1].'<br>';
+                }
             }
-        }
-
-        return "En cours";
+            
+            if($debug==true){
+                echo '<br>Tableau de trie trouvé.<br><br>';
+                var_dump($elements);
+                echo '<br><br>';
+                return $elements;
+            } else { return $elements; }
+        
+        } else {
+            if($debug==true){
+                echo '<br>Tableau de trie non trouvé.<br><br>';
+                echo 'failed "'.$file_csv.'"<br><br>';
+                return 'failed "'.$file_csv.'"';
+            } else { return 'failed "'.$file_csv.'"'; }
+    }
         
     }
 ?>

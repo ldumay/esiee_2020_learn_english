@@ -2,6 +2,7 @@
     include('init.php');
 
     $debugPage = true;
+    $debugPageFunctions = true;
 
     // Create necessary var and functions
     function retunIndex($selected){ 
@@ -284,25 +285,23 @@
             echo "<hr>";
             echo "<h3>Get file</h3>";
         }
-        $result_1 = fileGetZip($lecon_zip, $debugPage);
-        if($debugPage==true){
-            echo $result_1;
+        $result_1 = fileGetZip($lecon_zip, $debugPageFunctions);
+        if($result_1=="Enregistrement du zip OK." || $result_1=="Erreur transfert ! Ce zip esiste déjà."){ echo "[GOOD - A]<br>"; }
 
+        if($debugPage==true){
             echo "<hr>";
             echo "<h3>Extration file</h3>";
         }
-        $result_2 = fileZipOpenAndExtract($lecon_zip, $debugPage);
+        $result_2 = fileZipOpenAndExtract($lecon_zip, $debugPageFunctions);
         //extrator($file_tmp_name, $file_destination);
+        if($result_2=="Zip opened." || $result_2=="Erreur d'extraction ! Ce dossier esiste déjà."){ echo "[GOOD - B]<br>"; }
+        
         if($debugPage==true){
-            echo $result_2;
-
             echo "<hr>";
             echo "<h3>Read file</h3>";
-            $csv = getCSVOnZip($lecon_zip, $debugPage);
-
-            echo "<br>";
-            var_dump($csv);
+            $csv = getCSVOnZip($lecon_zip, $debugPageFunctions);
         }
+        if($csv!="failed \"_elementsList.csv\""){ echo "[GOOD - C]"; }
 
         // SQL
         /*
