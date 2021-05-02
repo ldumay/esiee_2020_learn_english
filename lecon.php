@@ -81,9 +81,7 @@
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
                                         <figure id ="0">
-                                            <audio
-                                                controls 
-                                                src="/learnenglish/sons/<?php echo $sound_array[0];?>">
+                                            <audio controls src="/learnenglish/sons/<?php echo $sound_array[0];?>">
                                                     Your browser does not support the
                                                     <code>audio</code> element.
                                             </audio>
@@ -93,9 +91,7 @@
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
                                         <figure id ="1">
-                                            <audio
-                                                controls 
-                                                src="/learnenglish/sons/<?php echo $sound_array[1];?>">
+                                            <audio controls src="/learnenglish/sons/<?php echo $sound_array[1];?>">
                                                     Your browser does not support the
                                                     <code>audio</code> element.
                                             </audio>
@@ -104,10 +100,8 @@
                                 </div>
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
-                                    <figure id ="2">
-                                            <audio
-                                                controls 
-                                                src="/learnenglish/sons/<?php echo $sound_array[2];?>">
+                                        <figure id ="2">
+                                            <audio controls src="/learnenglish/sons/<?php echo $sound_array[2];?>">
                                                     Your browser does not support the
                                                     <code>audio</code> element.
                                             </audio>
@@ -116,9 +110,8 @@
                                 </div>
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
-                                    <figure id ="3">
-                                            <audio controls 
-                                                src="/learnenglish/sons/<?php echo $sound_array[3];?>">
+                                        <figure id ="3">
+                                            <audio controls src="/learnenglish/sons/<?php echo $sound_array[3];?>">
                                                     Your browser does not support the
                                                     <code>audio</code> element.
                                             </audio>
@@ -126,8 +119,10 @@
                                     </div>                                            
                                 </div>                                            
                             </div>
-                            <div class="bouton" onclick="console.log(verify())">
-                                Valider
+                            <div class="row">
+                                <div class="bouton" onclick="console.log(verify())">
+                                    Valider
+                                </div>
                             </div>
                             <?php
                         }elseif($leconDescription == "images" ){
@@ -187,9 +182,13 @@
                                     </div>                                            
                                 </div>                                            
                             </div>
+                            <div class="row">
+
                             <div class="bouton" onclick="console.log(verify())">
                                 Valider
                             </div>
+                            </div>
+
                             <?php
                         }elseif($leconDescription == "bonus" ){
                             $words_array = array();
@@ -240,6 +239,7 @@
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
                                         <p class="font-weight-normal" id="2"><?php echo $def_array[2]; ?></p>
+                                    </div>
                                 </div>
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
@@ -247,9 +247,10 @@
                                     </div>                                            
                                 </div>                                            
                             </div>
-                            <br>
-                            <div class="bouton" onclick="console.log(verify())">
+                            <div class="row">
+                               <div class="bouton" onclick="console.log(verify())">
                                 Valider
+                                </div>
                             </div>
                             <?php
                             }elseif($leconDescription == "sonimages" ){
@@ -273,7 +274,7 @@
                                         <h2>Liste des mots</h2>
                                         <div1  class="column column-liste" ondrop="drop(event)" ondragover="allowDrop(event)" id="list">
                                             <div class="visibility" >azertyuiop</div>
-                                            <article class="card" id ="0" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <article  id ="0" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
                                             <figure id ="0">
                                                 <audio
                                                     controls 
@@ -283,7 +284,7 @@
                                                 </audio>
                                             </figure>
                                             </article>
-                                            <article class="card" id ="1" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <article  id ="1" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
                                             <figure id ="1">
                                                 <audio
                                                     controls 
@@ -293,7 +294,7 @@
                                                 </audio>
                                             </figure>
                                             </article>
-                                            <article class="card" id ="2" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <article  id ="2" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
                                             <figure id ="2">
                                                 <audio
                                                     controls 
@@ -303,7 +304,7 @@
                                                 </audio>
                                             </figure>
                                             </article>
-                                            <article class="card" id ="3" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
+                                            <article  id ="3" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
                                             <figure id ="3">
                                                 <audio controls 
                                                     src="/learnenglish/sons/<?php echo $sound_array[3];?>">
@@ -336,10 +337,11 @@
                                 </div>                                            
                             </div>
 
-                                    
+                            <div class="row">
                                 <div class="bouton" onclick="console.log(verify())">
                                     Valider
                                 </div>
+                            </div>
                             <?php
                         }
 
@@ -450,6 +452,9 @@
   img{
       width:250px;
       height:250px;
+  }
+  audio{
+      width:240px;
   }
   div.visibility {
   visibility: hidden;
