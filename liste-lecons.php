@@ -56,6 +56,11 @@
                                                 $themeTitle = $themes[1][1];
                                                 $themeType = 'info';
                                                 break;
+                                            case 3:
+                                                $themeId = $themes[2][0];
+                                                $themeTitle = $themes[2][1];
+                                                $themeType = 'info';
+                                                break;
                                             default:
                                                 $themeId = null;
                                                 $themeTitle = 'Aucun thème';

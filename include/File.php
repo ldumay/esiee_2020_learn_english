@@ -98,7 +98,6 @@
 
         if($debug==true){
             echo 'Vérification : <br>'.
-            'maxsize : '.$maxsize.' octects<br>'.
             '<br>'.
             '0 - file_full_name : '.$file_full_name.'<br>'.
             '1 - file_name : '.$file_name.'<br>'.

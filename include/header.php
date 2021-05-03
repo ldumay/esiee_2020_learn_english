@@ -1,3 +1,4 @@
+<?php if(isset($_SESSION['User_id'])){ ?>
 <!-- Header -->
 <div id="header" class="row">
 
@@ -28,3 +29,14 @@
 
 </div>
 <!-- ./Header -->
+<?php } else { ?>
+<!-- Header -->
+<div id="header" class="row">
+
+    <div class="col-12">
+        <h1 class="title text-center"><?php echo $project_title; ?></h1>
+    </div>
+
+</div>
+<!-- ./Header -->
+<?php } ?>

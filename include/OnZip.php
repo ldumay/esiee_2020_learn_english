@@ -48,9 +48,23 @@
                 echo '<br>';
             }
 
+            if (($handle = fopen($file_source_file, "r")) !== FALSE) {
+                while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $num = count($data);
+                    for ($c=0; $c < $num; $c++) {
+                        if($debug==true){ echo $data[$c] . "<br />\n"; }
+                        $datas[] = $data[$c];
+                    }
+                }
+                fclose($handle);
+            }
+
+            /*
             $myfile = fopen($file_source_file, "r") or die("Unable to open file!");
-            $datas = explode("\n", fread($myfile, filesize($file_source_file)));
+            $datas = fgetcsv($myfile, 1000, ",");
+            //$datas = explode("\n", fread($myfile, filesize($file_source_file)));
             fclose($myfile);
+            */
 
             $element = [];
             if($debug==true){

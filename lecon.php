@@ -46,15 +46,14 @@
                         if($leconDescription == "son" ){
                             $words_array = array();
                             $sound_array = array();
-                            $sql = 'SELECT sound_and_mots.id ,mots, link FROM sound_and_mots,mots,sound
-                                    where mots.id= sound_and_mots.id_mots
-                                    and sound.id= sound_and_mots.id_sound
-                                    
-                            ORDER BY RAND ( )
-                            LIMIT 4';
+                            $sql = 'SELECT sounds_and_mots.id ,mot, link 
+                                    FROM sounds_and_mots,mots,sounds
+                                    where mots.id= sounds_and_mots.id_mot
+                                    and sounds.id= sounds_and_mots.id_sound
+                                    ORDER BY RAND ( ) LIMIT 4';
                                 $result_sql = $host->query($sql);
                                 foreach  ($result_sql as $row) {
-                                    $words_array[] = $row['mots'];
+                                    $words_array[] = $row['mot'];
                                     $sound_array[] = $row['link'];
                                 }
                                 $words_oreder[] = $row['id'];
@@ -81,7 +80,7 @@
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
                                         <figure id ="0">
-                                            <audio controls src="/learnenglish/sons/<?php echo $sound_array[0];?>">
+                                            <audio controls src="<?php echo $domain; ?>sons/<?php echo $sound_array[0];?>">
                                                     Your browser does not support the
                                                     <code>audio</code> element.
                                             </audio>
@@ -91,7 +90,7 @@
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
                                         <figure id ="1">
-                                            <audio controls src="/learnenglish/sons/<?php echo $sound_array[1];?>">
+                                            <audio controls src="<?php echo $domain; ?>sons/<?php echo $sound_array[1];?>">
                                                     Your browser does not support the
                                                     <code>audio</code> element.
                                             </audio>
@@ -101,7 +100,7 @@
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
                                         <figure id ="2">
-                                            <audio controls src="/learnenglish/sons/<?php echo $sound_array[2];?>">
+                                            <audio controls src="<?php echo $domain; ?>sons/<?php echo $sound_array[2];?>">
                                                     Your browser does not support the
                                                     <code>audio</code> element.
                                             </audio>
@@ -111,7 +110,7 @@
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
                                         <figure id ="3">
-                                            <audio controls src="/learnenglish/sons/<?php echo $sound_array[3];?>">
+                                            <audio controls src="<?php echo $domain; ?>sons/<?php echo $sound_array[3];?>">
                                                     Your browser does not support the
                                                     <code>audio</code> element.
                                             </audio>
@@ -128,15 +127,14 @@
                         }elseif($leconDescription == "images" ){
                             $words_array = array();
                             $pictures_array = array();
-                            $sql = 'SELECT images_and_mots.id ,mots, link FROM images_and_mots,mots,images
-                            where mots.id= images_and_mots.id_mots
-                            and images.id= images_and_mots.id_images
-                            
-                        ORDER BY RAND ( )
-                        LIMIT 4';
+                            $sql = 'SELECT images_and_mots.id ,mot, link
+                                FROM images_and_mots,mots,images
+                                where mots.id= images_and_mots.id_mot
+                                and images.id= images_and_mots.id_image
+                                ORDER BY RAND ( ) LIMIT 4';
                             $result_sql = $host->query($sql);
                             foreach  ($result_sql as $row) {
-                                $words_array[] = $row['mots'];
+                                $words_array[] = $row['mot'];
                                 $pictures_array[] = $row['link'];
                             }
                             $words_oreder[] = $row['id'];
@@ -163,22 +161,22 @@
 
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
-                                        <img class="pictures" id="0" src="/learnenglish/images/<?php echo $pictures_array[0]; ?>">
+                                        <img class="pictures" id="0" src="<?php echo $domain; ?>images/<?php echo $pictures_array[0]; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
-                                        <img class="pictures" id="1" src="/learnenglish/images/<?php echo $pictures_array[1]; ?>">
+                                        <img class="pictures" id="1" src="<?php echo $domain; ?>images/<?php echo $pictures_array[1]; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
-                                        <img class="pictures" id="2" src="/learnenglish/images/<?php echo $pictures_array[2]; ?>">
+                                        <img class="pictures" id="2" src="<?php echo $domain; ?>images/<?php echo $pictures_array[2]; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
-                                        <img class="pictures" id ="3" src="/learnenglish/images/<?php echo $pictures_array[3]; ?>">
+                                        <img class="pictures" id ="3" src="<?php echo $domain; ?>images/<?php echo $pictures_array[3]; ?>">
                                     </div>                                            
                                 </div>                                            
                             </div>
@@ -193,12 +191,12 @@
                         }elseif($leconDescription == "bonus" ){
                             $words_array = array();
                             $def_array = array();
-                            $sql = 'SELECT def_and_mots.id , mots.mots m, def.link dl FROM def_and_mots,mots,def
-                            where mots.id= def_and_mots.id_mots
-                            and def.id= def_and_mots.id_def
-                            
-                        ORDER BY RAND ( )
-                        LIMIT 4';
+                            $sql = 'SELECT defs_and_mots.id, mots.mot m, defs.link dl
+                                FROM defs_and_mots,mots,defs
+                                where mots.id= defs_and_mots.id_mot
+                                and defs.id= defs_and_mots.id_def
+                                ORDER BY RAND ( )
+                                LIMIT 4';
                                 $result_sql = $host->query($sql);
                                 foreach  ($result_sql as $row) {
                                     $words_array[] = $row['m'];
@@ -253,15 +251,15 @@
                                 </div>
                             </div>
                             <?php
-                            }elseif($leconDescription == "sonimages" ){
+                        }elseif($leconDescription == "sonimages" ){
                                 $words_array = array();
                                 $pictures_array = array();
-                                $sql = 'SELECT sound_and_images.id ,sound.link sl, images.link il FROM sound_and_images,images,sound
-                                    where images.id= sound_and_images.id_images
-                                    and sound.id= sound_and_images.id_sound
-                                    
-                            ORDER BY RAND ( )
-                            LIMIT 4';
+                                $sql = 'SELECT sounds_and_images.id ,sounds.link sl, images.link il
+                                    FROM sounds_and_images,images,sounds
+                                    where images.id= sounds_and_images.id_image
+                                    and sounds.id= sounds_and_images.id_sound
+                                    ORDER BY RAND ( )
+                                    LIMIT 4';
                                 $result_sql = $host->query($sql);
                                 foreach  ($result_sql as $row) {
                                     $pictures_array[] = $row['il'];
@@ -278,7 +276,7 @@
                                             <figure id ="0">
                                                 <audio
                                                     controls 
-                                                    src="/learnenglish/sons/<?php echo $sound_array[0];?>">
+                                                    src="<?php echo $domain; ?>sons/<?php echo $sound_array[0];?>">
                                                         Your browser does not support the
                                                         <code>audio</code> element.
                                                 </audio>
@@ -288,7 +286,7 @@
                                             <figure id ="1">
                                                 <audio
                                                     controls 
-                                                    src="/learnenglish/sons/<?php echo $sound_array[1];?>">
+                                                    src="<?php echo $domain; ?>sons/<?php echo $sound_array[1];?>">
                                                         Your browser does not support the
                                                         <code>audio</code> element.
                                                 </audio>
@@ -298,7 +296,7 @@
                                             <figure id ="2">
                                                 <audio
                                                     controls 
-                                                    src="/learnenglish/sons/<?php echo $sound_array[2];?>">
+                                                    src="<?php echo $domain; ?>sons/<?php echo $sound_array[2];?>">
                                                         Your browser does not support the
                                                         <code>audio</code> element.
                                                 </audio>
@@ -307,7 +305,7 @@
                                             <article  id ="3" draggable="true" ondragstart="drag(event)" data-id="<?php echo rand(); ?>">
                                             <figure id ="3">
                                                 <audio controls 
-                                                    src="/learnenglish/sons/<?php echo $sound_array[3];?>">
+                                                    src="<?php echo $domain; ?>sons/<?php echo $sound_array[3];?>">
                                                         Your browser does not support the
                                                         <code>audio</code> element.
                                                 </audio>
@@ -317,22 +315,22 @@
                                     </div>
                                     <div class="col-md-2 content-table text-center">
                                     <div class="column column-0" ondrop="drop(event)" ondragover="allowDrop1(event)">
-                                        <img class="pictures" id="0" src="/learnenglish/images/<?php echo $pictures_array[0]; ?>">
+                                        <img class="pictures" id="0" src="<?php echo $domain; ?>images/<?php echo $pictures_array[0]; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-1" ondrop="drop(event)" ondragover="allowDrop2(event)">
-                                        <img class="pictures" id="1" src="/learnenglish/images/<?php echo $pictures_array[1]; ?>">
+                                        <img class="pictures" id="1" src="<?php echo $domain; ?>images/<?php echo $pictures_array[1]; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-2" ondrop="drop(event)" ondragover="allowDrop3(event)">
-                                        <img class="pictures" id="2" src="/learnenglish/images/<?php echo $pictures_array[2]; ?>">
+                                        <img class="pictures" id="2" src="<?php echo $domain; ?>images/<?php echo $pictures_array[2]; ?>">
                                     </div>
                                 </div>
                                 <div class="col-md-2 content-table text-center">
                                     <div class="column column-3" ondrop="drop(event)" ondragover="allowDrop4(event)">
-                                        <img class="pictures" id ="3" src="/learnenglish/images/<?php echo $pictures_array[3]; ?>">
+                                        <img class="pictures" id ="3" src="<?php echo $domain; ?>images/<?php echo $pictures_array[3]; ?>">
                                     </div>                                            
                                 </div>                                            
                             </div>

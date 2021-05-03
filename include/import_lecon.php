@@ -10,7 +10,7 @@
         <hr>
         <form method="post" action="post.php" enctype="multipart/form-data">
 			<div class="row">
-                <div class="col-md-12 col-xs-12">
+                <div class="col-md-12 col-xs-12 text-center">
                     <!-- Zip -->
                     <h5>Leçon au format zip : </h5>
                     <div class="input-group mb-3">
@@ -20,11 +20,17 @@
                         <br>4 images au format .jpeg
                         <br>1 fichier .csv contenu le nom des images au nommage Anglais
                     </p>
+                    <hr>
+                    <p>
+                        <b>ATTENTION avant import :
+                        <br>Fonctionnel seulement pour les leçon sous forme d'image et de mots.
+                        </b>
+                    </p>
                 </div>
             </div>
             <br><br>
             <div class="col-12 text-center">
-                <button type="submit" class="btn btn-success" id="submit_import_lecon" name="submit_import_lecon">Ajouter leçon</button>
+                <button type="submit" class="btn btn-success" id="submit_import_lecon" name="submit_import_lecon">Importer la leçon</button>
             </div>
 		</form>
         <br>

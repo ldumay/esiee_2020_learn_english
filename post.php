@@ -1,8 +1,8 @@
 <?php
     include('init.php');
 
-    $debugPage = true;
-    $debugPageFunctions = true;
+    $debugPage = false;
+    $debugPageFunctions = false;
 
     // Create necessary var and functions
     function retunIndex($selected){ 
@@ -317,7 +317,7 @@
 
         // Create var nessary
         $alert_typecolor = 'success';
-        $alert_message = 'La leçon a bien été ajouté.';
+        $alert_message = 'La nouvelle leçon a bien été créée.';
 
         // lecon_title
         if( isset($_POST['lecon_title']) && ($_POST['lecon_title']!='') ){ $lecon_title = $_POST['lecon_title']; } else { $lecon_title = 'NULL'; }
@@ -327,22 +327,26 @@
         if( isset($_POST['lecon_theme']) && ($_POST['lecon_theme']!='') ){ $lecon_theme = $_POST['lecon_theme']; } else { $lecon_theme = 'NULL'; }
         
         // SQL
-        /*
-        $sql = 'INSERT INTO `lecons`(`title`, `description`, `date_create`, `date_update`) VALUES ("'.$lecon_title.'", "'.$lecon_description.'",now(),now())';
+        $sql = 'INSERT INTO `lecons` (`id_theme`,`title`,`description`,`date_create`,`date_update`) VALUES ('.$lecon_theme.',"'.$lecon_title.'", "'.$lecon_description.'",now(),now());';
 
         $result = $host->query($sql);
 
+        
         // Create message
         $_SESSION['alert_typecolor'] = $alert_typecolor;
         $_SESSION['alert_message'] = $alert_message;
 
         // Back to Home page
-        retunIndex('index');
-        */
+        retunIndex('lecons');
     }
 
     //- Action after click button for export lecon in zip
     if( isset($_POST['submit_import_lecon']) ){
+
+        // Create var nessary
+        $alert_typecolor = 'success';
+        $alert_message = 'L\'importation du zip est un succès.';
+
         // lecon_zip
         if( isset($_FILES['lecon_zip']) && ($_FILES['lecon_zip']!='') ){ $lecon_zip = $_FILES['lecon_zip']; } else { $lecon_zip = 'NULL'; }
 
@@ -355,11 +359,6 @@
         if($debugPage==true){
             echo "<hr>";
             echo "<h3>New Leçon</h3>";
-            var_dump($lecon_title);
-            echo "<hr>";
-            var_dump($lecon_description);
-            echo "<hr>";
-            var_dump($lecon_theme);
             echo "<hr>";
             var_dump($lecon_zip);
         }
@@ -371,7 +370,7 @@
         $result_1 = fileGetZip($lecon_zip, $debugPageFunctions);
         if($result_1=="Enregistrement du zip OK." || $result_1=="Erreur transfert ! Ce zip esiste déjà."){
             $traitement_zip_getFile = true;
-            echo "[GOOD - A]<br>";
+            if($debugPage==true){ echo "[GOOD - A]<br>"; }
         }
 
         if($debugPage==true){
@@ -380,20 +379,20 @@
         }
         $result_2 = fileZipOpenAndExtract($lecon_zip, $debugPageFunctions);
         //extrator($file_tmp_name, $file_destination);
-        var_dump($result_2);
+        if($debugPage==true){ var_dump($result_2); }
         if($result_2=="Zip opened." || $result_2=="Erreur d'extraction ! Ce dossier esiste déjà."){
             $traitement_zip_extraction = true;
-            echo "[GOOD - B]<br>";
+            if($debugPage==true){ echo "[GOOD - B]<br>"; }
         }
         
         if($debugPage==true){
             echo "<hr>";
             echo "<h3>Read file</h3>";
-            $csv = getCSVOnZip($lecon_zip, $debugPageFunctions);
         }
+        $csv = getCSVOnZip($lecon_zip, $debugPageFunctions);
         if($csv!="failed \"_elementsList.csv\""){
             $traitement_zip_read = true;
-            echo "[GOOD - C]";
+            if($debugPage==true){ echo "[GOOD - C]<br>"; }
         }
 
         if($debugPage==true){
@@ -403,7 +402,7 @@
         $result_clean = cleanFileUploads($lecon_zip, $debugPageFunctions);
         if($result_clean=="Le zip a été retiré du dossier d'uploads."){
             $traitement_zip_clean = true;
-            echo "[GOOD - C]<br>";
+            if($debugPage==true){ echo "[GOOD - D]<br>"; }
         }
 
         if($debugPage==true){
@@ -428,141 +427,53 @@
             echo '<br><br>';
         }
 
-        if( ($traitement_zip_getFile==true && $traitement_zip_extraction==false && $traitement_zip_read==false && $traitement_zip_clean==false) 
-            || ($traitement_zip_getFile==true && $traitement_zip_extraction==false && $traitement_zip_read==true && $traitement_zip_clean==false)
-            || ($traitement_zip_getFile==false && $traitement_zip_extraction==false && $traitement_zip_read==true && $traitement_zip_clean==false) ){
+        if( $traitement_zip_getFile==false && $traitement_zip_extraction==false && $traitement_zip_read==false
+                && $traitement_zip_clean==false && $traitement_zip_insert==true ){
                 
+                $zip_open = false;
                 if($debugPage==true){
                     echo "Quelque chose s'est mal passé lors de l'extraction du Zip. Merci de réessayé.".
                         "<br>Si le problème persiste, merci de recompresse votre dossier au format .Zip".
                         "<br><b style=\"colors:red;\">Attention, le renommage d'un fichier Zip n'est pas pris en compte et peut bloqué le bon traitement de celui-ci.</b>";
                 }
+        } else { $zip_open = true; }
+
+        if($zip_open==true){
+            if($csv!=NULL){
+                $zip_folder_name = strstr($_FILES['lecon_zip']['name'], ".", true);
+                $result_import_csv = fileCSV($zip_folder_name,$csv,$debugPage,$debugPageFunctions,$host);
+            }
         }
 
-        if($csv!=NULL){
-            //init
-            $zip_lecon_Type_Insert_images_and_mots = 0;
-            $zip_lecon_Type_Insert_sounds_and_images = 0;
-            $zip_lecon_Type_Insert_sounds_and_mots = 0;
-            $zip_lecon_Type_Insert_defs_and_mots = 0;
-            //-
-            if($debugPage==true){ echo '<br>'; var_dump($csv); echo '<br>'; }
-            $zip_lecon_Name = $csv[0][1];
-            $zip_lecon_Type = $csv[1][1];
-            $zip_lecon_Type = intval($zip_lecon_Type);
-            if($debugPage==true){ echo '<br>'; var_dump($zip_lecon_Type); echo '<br>'; }
-            switch($zip_lecon_Type){
-                //ImagesAndMots
-                case 1 :
-                    $zip_lecon_Type_Insert_images_and_mots++; break;
-                //SoundsAndImages
-                case 2 :
-                    $zip_lecon_Type_Insert_sounds_and_images++; break;
-                //SoundsAndMots
-                case 3 :
-                    $zip_lecon_Type_Insert_sounds_and_mots++; break;
-                //DefsAndMots
-                case 4 :
-                    $zip_lecon_Type_Insert_defs_and_mots++; break;
-            }
-            //-
-            if($debugPage==true){
-                echo 'zip_lecon_Type_Insert_images_and_mots : '.$zip_lecon_Type_Insert_images_and_mots.'<br>';
-                echo 'zip_lecon_Type_Insert_sounds_and_images : '.$zip_lecon_Type_Insert_sounds_and_images.'<br>';
-                echo 'zip_lecon_Type_Insert_sounds_and_mots : '.$zip_lecon_Type_Insert_sounds_and_mots.'<br>';
-                echo 'zip_lecon_Type_Insert_defs_and_mots : '.$zip_lecon_Type_Insert_defs_and_mots.'<br>';
-            }
-
-            $zip_lecon_Theme = $csv[2][1];
-            $zip_lecon_AuteurLogin = $csv[3][1];
-            $zip_lecon_Description = $csv[4][1];
-            $zip_lecon_Statut = $csv[5][1];
-            if($zip_lecon_Statut=='Ouvert'){ $zip_lecon_Statut = 1; } else { $zip_lecon_Statut = 0; }
-            //-
-            $zip_lecon_Element_1_Nom = $csv[6][1];
-            $zip_lecon_Element_1_Image = $csv[7][1];
-            $zip_lecon_Element_2_Nom = $csv[8][1];
-            $zip_lecon_Element_2_Image = $csv[9][1];
-            $zip_lecon_Element_3_Nom = $csv[10][1];
-            $zip_lecon_Element_3_Image = $csv[11][1];
-            $zip_lecon_Element_4_Nom = $csv[12][1];
-            $zip_lecon_Element_4_Image = $csv[13][1];
-            if($debugPage==true){
-                echo '<br>';
-                echo 'zip_lecon_Element_1_Nom : '.$zip_lecon_Element_1_Nom.'<br>';
-                echo 'zip_lecon_Element_1_Image : '.$zip_lecon_Element_1_Image.'<br>';
-                echo 'zip_lecon_Element_2_Nom : '.$zip_lecon_Element_2_Nom.'<br>';
-                echo 'zip_lecon_Element_2_Image : '.$zip_lecon_Element_2_Image.'<br>';
-                echo 'zip_lecon_Element_3_Nom : '.$zip_lecon_Element_3_Nom.'<br>';
-                echo 'zip_lecon_Element_3_Image : '.$zip_lecon_Element_3_Image.'<br>';
-                echo 'zip_lecon_Element_4_Nom : '.$zip_lecon_Element_4_Nom.'<br>';
-                echo 'zip_lecon_Element_4_Image : '.$zip_lecon_Element_4_Image.'<br>';
-            }
-
-
-            //-
-            $pathFolder = $_FILES['lecon_zip']['name'];
-            $pathFolder = strstr($pathFolder, ".", true);
-            $zip_link_image_1 = $pathFolder.'/'.$zip_lecon_Element_1_Image;
-            $zip_link_image_2 = $pathFolder.'/'.$zip_lecon_Element_2_Image;
-            $zip_link_image_3 = $pathFolder.'/'.$zip_lecon_Element_3_Image;
-            $zip_link_image_4 = $pathFolder.'/'.$zip_lecon_Element_4_Image;
-            $sql_insert_into_images_image_1 = 'INSERT INTO `images` (`link`, `date_create`, `date_update`) VALUES ('.$zip_link_image_1.', now(), now())';
-            $sql_insert_into_images_image_2 = 'INSERT INTO `images` (`link`, `date_create`, `date_update`) VALUES ('.$zip_link_image_2.', now(), now())';
-            $sql_insert_into_images_image_3 = 'INSERT INTO `images` (`link`, `date_create`, `date_update`) VALUES ('.$zip_link_image_3.', now(), now())';
-            $sql_insert_into_images_image_4 = 'INSERT INTO `images` (`link`, `date_create`, `date_update`) VALUES ('.$zip_link_image_4.', now(), now())';
-            if($debugPage==true){
-                echo '<br>'.$sql_insert_into_images_image_1;
-                echo '<br>'.$sql_insert_into_images_image_2;
-                echo '<br>'.$sql_insert_into_images_image_3;
-                echo '<br>'.$sql_insert_into_images_image_4;
-            }
-            //-
-            $sql_insert_into_mots_mot_1 = 'INSERT INTO `mots` (`mots`, `date_create`, `date_update`) VALUES ('.$zip_lecon_Element_1_Nom.', now(), now())';
-            $sql_insert_into_mots_mot_2 = 'INSERT INTO `mots` (`mots`, `date_create`, `date_update`) VALUES ('.$zip_lecon_Element_2_Nom.', now(), now())';
-            $sql_insert_into_mots_mot_3 = 'INSERT INTO `mots` (`mots`, `date_create`, `date_update`) VALUES ('.$zip_lecon_Element_3_Nom.', now(), now())';
-            $sql_insert_into_mots_mot_4 = 'INSERT INTO `mots` (`mots`, `date_create`, `date_update`) VALUES ('.$zip_lecon_Element_4_Nom.', now(), now())';
-            if($debugPage==true){
-                echo '<br>'.$sql_insert_into_mots_mot_1;
-                echo '<br>'.$sql_insert_into_mots_mot_2;
-                echo '<br>'.$sql_insert_into_mots_mot_3;
-                echo '<br>'.$sql_insert_into_mots_mot_4;
-            }
-            //-
-            $sql_insert_into_images_and_mots = 'INSERT INTO `images_and_mots`'.
-                '(`id`, `id_image`, `id_mot`, `date_create`, `date_update`)'.
-                ' VALUES '.
-                '([value-1],[value-2],[value-3], now(), now())';
-            //-
-            $sql_insert_into_lecons = 'INSERT INTO `lecons`'.
-                '(`id_theme`, `id_images_and_mots`, `id_sounds_and_images`, `id_sounds_and_mots`, `id_defs_and_mots`, `title`, `description`, `statut`, `date_create`, `date_update`)'.
-                ' VALUES '.
-                '(0,'.
-                $zip_lecon_Type_Insert_images_and_mots.','.
-                $zip_lecon_Type_Insert_sounds_and_images.','.
-                $zip_lecon_Type_Insert_sounds_and_mots.','.
-                $zip_lecon_Type_Insert_defs_and_mots.','.
-                '"'.$zip_lecon_Name.'","'.
-                '"'.$zip_lecon_Description.'",'.
-                $zip_lecon_Statut.
-                ',now(),now())';
-            
-            echo '<br>'.$sql_insert_into_lecons;
+        if($debugPage==true){
+            echo 'zip_open : ';
+            var_dump($zip_open);
+            echo '<br><br>';
+            echo 'result_import_csv : ';
+            var_dump($result_import_csv);
+            echo '<br><br>';
         }
-
-        // SQL
-        /*
-        $sql = 'INSERT INTO `lecons`(`title`, `description`, `date_create`, `date_update`) VALUES ("'.$lecon_title.'", "'.$lecon_description.'",now(),now())';
-
-        $result = $host->query($sql);
+        
+        /*if($zip_open==true && $result_import_csv=='existing'){
+            $alert_typecolor = 'warning';
+            $alert_message = 'La leçon n\'a pas pu être importer car elle existe déjà.';
+        }else */if($zip_open==true && $result_import_csv==true){
+            $alert_typecolor = 'success';
+            $alert_message = 'La leçon a bien été ajouté.';
+        }else {
+            $alert_typecolor = 'danger';
+            $alert_message = 'Erreur lors de l\'importation.<br>La leçon n\'a pas pu être importer.<br>Merci de vérifier les normes de notre plateforme.';
+        }
 
         // Create message
         $_SESSION['alert_typecolor'] = $alert_typecolor;
         $_SESSION['alert_message'] = $alert_message;
+        if($debugPage==true){
+            echo '<h2>'.$alert_message.'</h2>';
+        }
 
         // Back to Home page
-        retunIndex('index');
-        */
+        retunIndex('lecons');
     }
 
     //- Action after click button for export lecon in zip
@@ -724,19 +635,118 @@
 
     //- Action after click button for delete lecon
     if( isset($_GET['lecon_id']) && isset($_GET['delete']) && $_GET['delete']==true){
+        $webDir = 'shares_unzip';
 
-        // Create var nessary
-        $alert_typecolor = 'success';
-        $alert_message = 'La leçon a bien été supprimé.';
+        $sql = 'SELECT `id`,`title`,`folder` FROM `lecons` WHERE id='.$_GET['lecon_id'].'';
+        if($debugPage==true){ echo '<br>'.$sql.'<br>'; }
+        $result_sql = $host->query($sql);
+        while ( $row = $result_sql->fetch() ){
+            $lecon_folder = $row['folder'];
+            $lecon_title = $row['title'];
+        }
+        if($debugPage==true){
+            echo 'title : '.$lecon_title.'<br>';
+            echo 'folder : '.$lecon_folder.'<br>';
+        }
+        $lecon_path_folder = $webDir.'/'.$lecon_folder;
 
-        // SQL
-        $sql = 'DELETE FROM `lecons` WHERE `id`='.$_GET['lecon_id'].'';
-        
-        $result = $host->query($sql);
+        $isClean = false;
+        $dir = opendir($webDir);
+        while($file = readdir($dir)){
+            if($debugPage==true){ echo 'File / File name |=> '.$file.' / '.$lecon_folder.'<br>'; }
+            if($file==$lecon_folder){
+                if($debugPage==true){
+                    echo '<br>';
+                    var_dump($lecon_path_folder);
+                    echo '<br><br>';
+                }
+                if (PHP_OS === 'Windows') {
+                    exec(sprintf("rd /s /q %s", escapeshellarg($lecon_path_folder)));
+                } else {
+                    exec(sprintf("rm -rf %s", escapeshellarg($lecon_path_folder)));
+                }
+                $isClean = true;
+            }
+        }
+        closedir($dir);
+
+        if($isClean==true){
+            $isCleanBdd = false;
+
+            // SQL
+            try{
+                //-In images_and_mots
+                $sql = 'SELECT `id`,`id_lecon` FROM `images_and_mots` WHERE `id_lecon`='.$_GET['lecon_id'].';';
+                if($debugPage==true){ echo '<br>'.$sql.'<br>'; }
+                $result_sql = $host->query($sql);
+                while ( $row = $result_sql->fetch() ){
+                    $lecon_collection_id_images_and_mots[] = $row['id'];
+                }
+                foreach($lecon_collection_id_images_and_mots as $id_images_and_mots){
+                    $sql = 'DELETE FROM `images_and_mots` WHERE `id`='.$id_images_and_mots.';';
+                    $result = $host->query($sql);
+                    if($debugPage==true){ echo $sql.'<br>'; } else { $result = $host->query($sql); }
+                }
+
+                //-In images
+                $sql = 'SELECT `id`,`id_lecon` FROM `images` WHERE `id_lecon`='.$_GET['lecon_id'].';';
+                if($debugPage==true){ echo '<br>'.$sql.'<br>'; }
+                $result_sql = $host->query($sql);
+                while ( $row = $result_sql->fetch() ){
+                    $lecon_collection_id_images[] = $row['id'];
+                }
+                foreach($lecon_collection_id_images as $id_images){
+                    $sql = 'DELETE FROM `images` WHERE `id`='.$id_images.';';
+                    $result = $host->query($sql);
+                    if($debugPage==true){ echo $sql.'<br>'; } else { $result = $host->query($sql); }
+                }
+
+                //-In mots
+                $sql = 'SELECT `id`,`id_lecon` FROM `mots` WHERE `id_lecon`='.$_GET['lecon_id'].';';
+                if($debugPage==true){ echo '<br>'.$sql.'<br>'; }
+                $result_sql = $host->query($sql);
+                while ( $row = $result_sql->fetch() ){
+                    $lecon_collection_id_mots[] = $row['id'];
+                }
+                foreach($lecon_collection_id_mots as $id_mots){
+                    $sql = 'DELETE FROM `mots` WHERE `id`='.$id_mots.';';
+                    $result = $host->query($sql);
+                    if($debugPage==true){ echo $sql.'<br>'; } else { $result = $host->query($sql); }
+                }
+
+                //-In lecons
+                $sql = 'SELECT `id` FROM `lecons` WHERE id='.$_GET['lecon_id'].';';
+                if($debugPage==true){ echo '<br>'.$sql.'<br>'; }
+                $result_sql = $host->query($sql);
+                while ( $row = $result_sql->fetch() ){
+                    $lecon_id = $row['id'];
+                }
+
+                $sql = 'DELETE FROM `lecons` WHERE `id`='.$_GET['lecon_id'].';';
+                $result = $host->query($sql);
+                if($debugPage==true){ echo $sql.'<br>'; } else { $result = $host->query($sql); }
+                
+                $isCleanBdd = true;
+            }catch(Exception $e){ echo $e; }
+
+            if($isClean==true && $isCleanBdd==true){
+                $alert_typecolor = 'success';
+                $alert_message = 'La leçon a bien été supprimé.';
+            } else {
+                $alert_typecolor = 'danger';
+                $alert_message = 'Erreur lors de la suppresion de la leçon en bdd.';
+            }
+
+        } else {
+            $alert_typecolor = 'danger';
+            $alert_message = 'Erreur lors de la suppresion des dossiers de la leçon.';
+        }
 
         // Create message
         $_SESSION['alert_typecolor'] = $alert_typecolor;
         $_SESSION['alert_message'] = $alert_message;
+
+        if($debugPage==true){ echo '<h2>'.$alert_message.'</h2>'; }
 
         // Back to Home page
         retunIndex('lecons');

@@ -6,6 +6,7 @@
     // Others includes
 	include('include/ldumay_package_functions.php');
     include('include/File.php');
+    include('include/FileCSV.php');
     include('include/Zip.php');
     include('include/OnZip.php');
     include('include/Extractor.php');
@@ -20,7 +21,7 @@
     $project_start_version = "v0.1.0";
     //-
     $project_currently_date = ToDay("d/m/Y");
-    $project_currently_version = "v0.3.5";
+    $project_currently_version = "v0.3.6";
     //-
     $responsive = true;
     //-
