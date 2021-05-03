@@ -13,7 +13,11 @@
 Les élèves peuvent s’entrainer chez eux en cliquant sur le lien.Ce projet nécessite une interaction avec du JS (coté ludique) donc un graphisme attrayant. Le reste sera fait en PHP avec ou sans BDD MySQL.
 (*) Cas des trinômes : les comptes enseignants seront récupérés depuis une plateforme Moodle en tapant directement dans la BDD. On doit pouvoir recuperer une leçon via une API REST
 
-## BDD de démo dans le dossier "_Save_BDD"
+## Présentation vidéo du projet
+
+[Au formation mp4](http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mp4)
+[Au formation mouv](http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mouv)
+
 <figure class="video_container">
   <video controls="true" allowfullscreen="true" poster="path/to/poster_image.png">
     <source src="http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mp4" type="video/mp4">
@@ -21,7 +25,8 @@
   </video>
 </figure>
 
-## BDD de démo dans le dossier "_Save_BDD"
+## BDD de démo dans le dossier [" Save BDD"](https://github.com/ldumay/LearnEnglish/blob/main/_Save_BDD/)
+
 ![img_bdd](https://github.com/ldumay/LearnEnglish/blob/main/_Save_BDD/save_9_2021_05_03_3.png)
 
 ## Le Tree du projet :
