@@ -15,15 +15,8 @@
 
 ## Présentation vidéo du projet
 
-[Au formation mp4](http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mp4)
-[Au formation mouv](http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mouv)
-
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true" poster="path/to/poster_image.png">
-    <source src="http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mp4" type="video/mp4">
-    <source src="http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mov" type="video/mov">
-  </video>
-</figure>
+- [Au formation mp4](http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mp4)
+- [Au formation mouv](http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mouv)
 
 ## BDD de démo dans le dossier [" Save BDD"](https://github.com/ldumay/LearnEnglish/blob/main/_Save_BDD/)
 
