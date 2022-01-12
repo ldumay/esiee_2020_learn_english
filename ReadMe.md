@@ -7,16 +7,37 @@
 ## Sujet du projet :
 
 #### **Projet LearnEnglish**
-LearnEnglish est une application qui permet de réviser l'anglais pour les enfantsDévelopper une application simple et intuitive afin de permettre à des enfants de réviser l'anglais.Les enfants ont accès à des leçons de vocabulaire par thème : Halloween, NoëlUne leçon propose plusieurs types d'exercices.- Les glisser deposer : on voit un ensemble d'images (max 4) et un ensemble de mots dans le désordre. L'enfant doit déplacer les mots vers les images correspondantes.- Les Ecoute et choisiImage : on voit un ensemble d'images (max 4) et 4 sons, l'enfant doit choisir quel son va avec quelle image- Les Ecoute et choisiTexte : on voit un ensemble de textes (max 4) et 4 sons, l'enfant doit choisir quel son va avec quelle image**BackEnd :**Un enseignant peut créer des leçons, modifier, supprimer des leçons avec les exercices correspondants.Les leçons peuvent être importées ou exportées en format zip.Un enseignant a la possibilité de publier ses leçons sur internet directement sur le site de l’école en indiquant un lien de type : learnenglish.nomecole.fr/lecon.php?id=123 , cela permet aux élèves d’accéder au leçon via un lien hypertexte pour le faire de chez eux en ligne.
-Un admin doit pouvoir créer et gérer les comptes des enseignants. (*)
-**FrontEnd :**
-Les élèves peuvent s’entrainer chez eux en cliquant sur le lien.Ce projet nécessite une interaction avec du JS (coté ludique) donc un graphisme attrayant. Le reste sera fait en PHP avec ou sans BDD MySQL.
-(*) Cas des trinômes : les comptes enseignants seront récupérés depuis une plateforme Moodle en tapant directement dans la BDD. On doit pouvoir recuperer une leçon via une API REST
+
+LearnEnglish est une application qui permet de réviser l'anglais pour les enfants
+Développer une application simple et intuitive afin de permettre à des enfants de réviser l'anglais.
+
+Les enfants ont accès à des leçons de vocabulaire par thème : Halloween, Noël
+Une leçon propose plusieurs types d'exercices.
+
+- Les glisser deposer : on voit un ensemble d'images (max 4) et un ensemble de mots dans le désordre. L'enfant doit déplacer les mots vers les images correspondantes.
+- Les Ecoute et choisiImage : on voit un ensemble d'images (max 4) et 4 sons, l'enfant doit choisir quel son va avec quelle image
+- Les Ecoute et choisiTexte : on voit un ensemble de textes (max 4) et 4 sons, l'enfant doit choisir quel son va avec quelle image
+
+**BackEnd :**
+
+Un enseignant peut créer des leçons, modifier, supprimer des leçons avec les exercices correspondants.
+Les leçons peuvent être importées ou exportées en format zip.
+
+Un enseignant a la possibilité de publier ses leçons sur internet directement sur le site de l’école en indiquant un lien de type : learnenglish.nomecole.fr/lecon.php?id=123 , cela permet aux élèves d’accéder au leçon via un lien hypertexte pour le faire de chez eux en ligne.
+
+Un admin doit pouvoir créer et gérer les comptes des enseignants. (*)
+
+**FrontEnd :**
+
+Les élèves peuvent s’entrainer chez eux en cliquant sur le lien.
+Ce projet nécessite une interaction avec du JS (coté ludique) donc un graphisme attrayant. Le reste sera fait en PHP avec ou sans BDD MySQL.
+
+(*) Cas des trinômes : les comptes enseignants seront récupérés depuis une plateforme Moodle en tapant directement dans la BDD. On doit pouvoir recuperer une leçon via une API REST
 
 ## Présentation vidéo du projet
 
-- [Au formation mp4](http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mp4)
-- [Au formation mouv](http://uploads.ldumay.fr/tmp/LearnEnglish/Demo_video.mouv)
+- [Au formation mp4](http://uploads.ldumay.fr/esiee-it/LearnEnglish/Demo_video.mp4)
+- [Au formation mouv](http://uploads.ldumay.fr/esiee-it/LearnEnglish/Demo_video.mouv)
 
 ## BDD de démo dans le dossier [" Save BDD"](https://github.com/ldumay/LearnEnglish/blob/main/_Save_BDD/)
 
